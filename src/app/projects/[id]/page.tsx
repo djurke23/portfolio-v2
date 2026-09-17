@@ -60,8 +60,13 @@ export default async function CaseStudyPage({
 
   const { caseStudy } = project;
 
-  // Other case studies for bottom nav
-  const otherProjects = projects.filter((p) => p.caseStudy && p.id !== project.id);
+  // Sequential case study cycle
+  const caseStudyProjects = projects.filter((p) => p.caseStudy);
+  const currentIndex = caseStudyProjects.findIndex((p) => p.id === project.id);
+  const nextProject =
+    caseStudyProjects.length > 1
+      ? caseStudyProjects[(currentIndex + 1) % caseStudyProjects.length]
+      : null;
 
   return (
     <div className="min-h-screen bg-[#070709] text-white pt-24 pb-32">
@@ -356,14 +361,14 @@ export default async function CaseStudyPage({
             <span>Return to Portfolio</span>
           </Link>
 
-          {otherProjects.length > 0 && (
+          {nextProject && (
             <div className="flex flex-wrap items-center gap-4">
               <span className="text-xs font-mono text-neutral-500">Next Case Study:</span>
               <Link
-                href={`/projects/${otherProjects[0].id}`}
+                href={`/projects/${nextProject.id}`}
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-white text-xs font-mono border border-white/10 transition-all"
               >
-                <span>{otherProjects[0].title}</span>
+                <span>{nextProject.title}</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
               </Link>
             </div>

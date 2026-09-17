@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
 interface TextRevealProps {
   text: string;
@@ -41,7 +41,7 @@ function Word({
   range,
 }: {
   children: React.ReactNode;
-  progress: any;
+  progress: MotionValue<number>;
   range: [number, number];
 }) {
   const opacity = useTransform(progress, range, [0.15, 1]);

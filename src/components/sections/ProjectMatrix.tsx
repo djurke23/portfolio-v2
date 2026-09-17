@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { getSecondaryProjects } from "@/data/projects";
 import { ProjectCategory } from "@/types";
-import { ArrowUpRight, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { GithubIcon, FigmaIcon } from "@/components/ui/SocialIcons";
 
 export default function ProjectMatrix() {

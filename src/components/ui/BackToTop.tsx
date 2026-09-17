@@ -18,6 +18,11 @@ export default function BackToTop() {
   }, []);
 
   const scrollToTop = () => {
+    if (typeof window !== "undefined" && window.__lenis) {
+      window.__lenis.scrollTo(0);
+      return;
+    }
+
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;

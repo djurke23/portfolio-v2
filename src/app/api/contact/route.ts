@@ -70,11 +70,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: "Message received! (Running in development mode; configure RESEND_API_KEY for live delivery).",
+        message: "Thank you! Your inquiry has been received and I will be in touch shortly.",
       },
       { status: 200 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Contact route handler error:", error);
     return NextResponse.json(
       { error: "An unexpected error occurred. Please try again later." },

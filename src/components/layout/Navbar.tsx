@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/site";
 import { FileText, ArrowUpRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
@@ -10,6 +11,28 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  const resolveHref = (href: string) => {
+    if (isHome) return href;
+    return `/${href}`;
+  };
+
+  const handleNavClick = (e?: React.MouseEvent<HTMLAnchorElement>, targetHref?: string) => {
+    setMobileMenuOpen(false);
+    if (e && isHome && targetHref?.startsWith("#")) {
+      const el = document.querySelector(targetHref);
+      if (el) {
+        e.preventDefault();
+        if (window.__lenis) {
+          window.__lenis.scrollTo(el as HTMLElement);
+        } else {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,10 +65,6 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const handleNavClick = () => {
-    setMobileMenuOpen(false);
-  };
-
   return (
     <header className="fixed top-0 left-0 right-0 z-40 flex justify-center px-4 sm:px-6 pt-4 sm:pt-6 pointer-events-none">
       <nav
@@ -76,7 +95,8 @@ export default function Navbar() {
           {siteConfig.navItems.map((item) => (
             <a
               key={item.href}
-              href={item.href}
+              href={resolveHref(item.href)}
+              onClick={(e) => handleNavClick(e, item.href)}
               className="px-3 py-1.5 rounded-full hover:text-white hover:bg-white/5 transition-all"
             >
               {item.label}
@@ -172,6 +192,7 @@ export default function Navbar() {
               role="dialog"
               aria-modal="true"
               aria-label="Navigation Menu"
+              data-lenis-prevent="true"
               initial={{ opacity: 0, y: -16, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -16, scale: 0.98 }}
@@ -205,8 +226,8 @@ export default function Navbar() {
                 {siteConfig.navItems.map((item, index) => (
                   <motion.a
                     key={item.href}
-                    href={item.href}
-                    onClick={handleNavClick}
+                    href={resolveHref(item.href)}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.05 * index + 0.08, duration: 0.25 }}
@@ -228,7 +249,7 @@ export default function Navbar() {
                 <a
                   href={siteConfig.cvPath}
                   download
-                  onClick={handleNavClick}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white text-neutral-950 font-semibold text-sm hover:bg-neutral-200 transition-colors shadow-lg active:scale-98"
                 >
                   <FileText className="w-4 h-4 text-emerald-600" />

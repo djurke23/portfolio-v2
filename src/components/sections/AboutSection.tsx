@@ -5,7 +5,7 @@ import Image from "next/image";
 import { siteConfig } from "@/data/site";
 import { educationList } from "@/data/education";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { GraduationCap, MapPin, Mail, ArrowUpRight, FileText, CheckCircle2 } from "lucide-react";
+import { GraduationCap, ArrowUpRight, FileText, CheckCircle2 } from "lucide-react";
 
 export default function AboutSection() {
   return (

@@ -88,3 +88,9 @@ export interface TechnologyCategory {
   description: string;
   skills: TechnologyItem[];
 }
+
+declare global {
+  interface Window {
+    __lenis?: import("lenis").default;
+  }
+}

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { siteConfig } from "@/data/site";
-import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Loader2, ArrowUpRight } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -45,9 +45,9 @@ export default function ContactSection() {
       setStatus("success");
       setResponseMsg(data.message || "Thank you! Your message has been sent.");
       setFormData({ name: "", email: "", phone: "", message: "" });
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus("error");
-      setResponseMsg(err.message || "Something went wrong. Please reach out via email directly.");
+      setResponseMsg(err instanceof Error ? err.message : "Something went wrong. Please reach out via email directly.");
     }
   };
 
