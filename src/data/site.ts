@@ -1,0 +1,27 @@
+export const siteConfig = {
+  name: "Luka Đurić",
+  title: "Luka Đurić — Full-Stack Developer & Product Craftsman",
+  role: "Full-Stack Developer",
+  tagline: "I architect and build modern web applications and digital products from idea to production — combining robust engineering with refined UI/UX design.",
+  description: "Personal portfolio and engineering case studies of Luka Đurić, a Full-Stack Developer specializing in Next.js, TypeScript, React Native, Go, and high-performance user interfaces.",
+  url: "https://lukadjuric.dev",
+  ogImage: "/assets/images/portfolio-v1.png",
+  location: "Belgrade, Serbia",
+  email: "lukadjuricdjurke@pm.me",
+  phone: "+381677411001",
+  availability: "Available for full-stack opportunities",
+  cvPath: "/cv/CV.pdf",
+  socials: {
+    github: "https://github.com/djurke23",
+    linkedin: "https://www.linkedin.com/in/djurke23/",
+    email: "mailto:lukadjuricdjurke@pm.me",
+  },
+  navItems: [
+    { label: "Work", href: "#work" },
+    { label: "Expertise", href: "#discipline" },
+    { label: "Stack", href: "#stack" },
+    { label: "Experience", href: "#experience" },
+    { label: "About", href: "#about" },
+    { label: "Contact", href: "#contact" },
+  ],
+};
