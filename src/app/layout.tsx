@@ -81,10 +81,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} dark`}
       data-scroll-behavior="smooth"
     >
-      <body className="min-h-screen bg-[#070709] text-[#f4f4f7] font-sans antialiased overflow-x-hidden selection:bg-emerald-500/30 selection:text-white">
+      <body
+        suppressHydrationWarning
+        className="min-h-screen bg-[#070709] text-[#f4f4f7] font-sans antialiased overflow-x-hidden selection:bg-emerald-500/30 selection:text-white"
+      >
         <SmoothScrollProvider>
           <AmbientBackground />
           <CustomCursor />
