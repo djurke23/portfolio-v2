@@ -61,6 +61,10 @@ export interface Experience {
   description: string;
   responsibilities: string[];
   technologies: string[];
+  broadcastContext?: {
+    isLive?: boolean;
+    tags: string[];
+  };
 }
 
 export interface Education {

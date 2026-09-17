@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import MagneticButton from "@/components/ui/MagneticButton";
-import { ArrowDown, ArrowUpRight, MapPin, Sparkles, FileText } from "lucide-react";
+import { ArrowDown, ArrowUpRight, MapPin, FileText } from "lucide-react";
 
 export default function HeroSection() {
   return (
@@ -115,9 +115,8 @@ export default function HeroSection() {
         transition={{ delay: 0.8, duration: 1 }}
         className="mt-16 sm:mt-24 pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-6 text-xs font-mono text-neutral-500"
       >
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-          <span>Next.js 15 • TypeScript • React Native • Go</span>
+        <div className="flex items-center">
+          <span>Next.js • TypeScript • React Native • Go • PostgreSQL</span>
         </div>
         <div>
           <span>Idea → Architecture → Code → Production</span>

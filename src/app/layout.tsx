@@ -5,6 +5,7 @@ import { siteConfig } from "@/data/site";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 import CustomCursor from "@/components/layout/CustomCursor";
 import AmbientBackground from "@/components/ui/AmbientBackground";
+import BackToTop from "@/components/ui/BackToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -65,6 +66,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -75,13 +81,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} dark scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} dark`}
+      data-scroll-behavior="smooth"
     >
       <body className="min-h-screen bg-[#070709] text-[#f4f4f7] font-sans antialiased overflow-x-hidden selection:bg-emerald-500/30 selection:text-white">
         <SmoothScrollProvider>
           <AmbientBackground />
           <CustomCursor />
           {children}
+          <BackToTop />
         </SmoothScrollProvider>
       </body>
     </html>
