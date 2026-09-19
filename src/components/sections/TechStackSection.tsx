@@ -3,19 +3,21 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { technologyCategories } from "@/data/technologies";
+import { useLanguage } from "@/context/LanguageContext";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { Code } from "lucide-react";
 
 export default function TechStackSection() {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const { dict } = useLanguage();
 
   return (
     <section id="stack" className="py-24 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
       <SectionHeader
         number="05"
-        category="Technology Matrix"
-        title="Tools & Technologies"
-        description="Curated tools and frameworks honed across production web applications, iOS releases, and agile engineering squads. No arbitrary percentage bars."
+        category={dict.stack.eyebrow}
+        title={dict.stack.title}
+        description={dict.stack.description}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -30,7 +32,7 @@ export default function TechStackSection() {
                   {category.title}
                 </h3>
                 <span className="text-[11px] font-mono text-emerald-400 font-medium">
-                  {category.skills.length} tools
+                  {category.skills.length} {dict.stack.toolsCount}
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed">

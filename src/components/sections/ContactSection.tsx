@@ -2,9 +2,11 @@
 
 import React, { useState } from "react";
 import { siteConfig } from "@/data/site";
+import { useLanguage } from "@/context/LanguageContext";
 import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
 export default function ContactSection() {
+  const { dict } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -39,15 +41,15 @@ export default function ContactSection() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Failed to send message.");
+        throw new Error(data.error || dict.contact.errorDefault);
       }
 
       setStatus("success");
-      setResponseMsg(data.message || "Thank you! Your message has been sent.");
+      setResponseMsg(data.message || dict.contact.successDefault);
       setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (err: unknown) {
       setStatus("error");
-      setResponseMsg(err instanceof Error ? err.message : "Something went wrong. Please reach out via email directly.");
+      setResponseMsg(err instanceof Error ? err.message : dict.contact.errorDefault);
     }
   };
 
@@ -58,13 +60,13 @@ export default function ContactSection() {
         <div className="lg:col-span-5 space-y-8">
           <div className="space-y-4">
             <div className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-semibold">
-              [08] Contact & Inquiries
+              [09] {dict.contact.eyebrow}
             </div>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white uppercase font-mono leading-[1.05]">
-              LET&apos;S BUILD SOMETHING.
+              {dict.contact.title}
             </h2>
             <p className="text-base sm:text-lg text-neutral-400 font-light leading-relaxed">
-              Have a digital product to architect, a web platform to build, or an engineering role to discuss? Reach out directly.
+              {dict.contact.subtitle}
             </p>
           </div>
 
@@ -77,7 +79,7 @@ export default function ContactSection() {
                 <Mail className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs font-mono text-neutral-500 uppercase">Direct Email</div>
+                <div className="text-xs font-mono text-neutral-500 uppercase">{dict.contact.directEmail}</div>
                 <div className="text-sm font-medium text-white">{siteConfig.email}</div>
               </div>
             </a>
@@ -90,7 +92,7 @@ export default function ContactSection() {
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs font-mono text-neutral-500 uppercase">Telephone</div>
+                <div className="text-xs font-mono text-neutral-500 uppercase">{dict.contact.telephone}</div>
                 <div className="text-sm font-medium text-white">{siteConfig.phone}</div>
               </div>
             </a>
@@ -100,7 +102,7 @@ export default function ContactSection() {
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs font-mono text-neutral-500 uppercase">Location</div>
+                <div className="text-xs font-mono text-neutral-500 uppercase">{dict.contact.location}</div>
                 <div className="text-sm font-medium text-white">{siteConfig.location}</div>
               </div>
             </div>
@@ -112,10 +114,10 @@ export default function ContactSection() {
           <div className="glass-card p-8 sm:p-10 rounded-3xl border border-white/10 shadow-2xl space-y-6">
             <div className="space-y-1">
               <h3 className="text-xl font-bold text-white tracking-tight">
-                Send a Message
+                {dict.contact.formTitle}
               </h3>
               <p className="text-xs sm:text-sm text-neutral-400 font-light">
-                Fill out the form below and I will get back to you promptly.
+                {dict.contact.formSubtitle}
               </p>
             </div>
 
@@ -123,7 +125,7 @@ export default function ContactSection() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label htmlFor="name" className="text-xs font-mono uppercase text-neutral-400 font-medium">
-                    Your Name <span className="text-emerald-400">*</span>
+                    {dict.contact.nameLabel} <span className="text-emerald-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -132,14 +134,14 @@ export default function ContactSection() {
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Jane Doe"
+                    placeholder={dict.contact.namePlaceholder}
                     className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-neutral-600 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
                   />
                 </div>
 
                 <div className="space-y-1.5">
                   <label htmlFor="email" className="text-xs font-mono uppercase text-neutral-400 font-medium">
-                    Your Email <span className="text-emerald-400">*</span>
+                    {dict.contact.emailLabel} <span className="text-emerald-400">*</span>
                   </label>
                   <input
                     type="email"
@@ -148,7 +150,7 @@ export default function ContactSection() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="jane@example.com"
+                    placeholder={dict.contact.emailPlaceholder}
                     className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-neutral-600 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
                   />
                 </div>
@@ -156,7 +158,7 @@ export default function ContactSection() {
 
               <div className="space-y-1.5">
                 <label htmlFor="phone" className="text-xs font-mono uppercase text-neutral-400 font-medium">
-                  Phone Number <span className="text-neutral-600 text-[10px]">(Optional)</span>
+                  {dict.contact.phoneLabel} <span className="text-neutral-600 text-[10px]">{dict.contact.phoneOptional}</span>
                 </label>
                 <input
                   type="tel"
@@ -164,14 +166,14 @@ export default function ContactSection() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="+381 67 ..."
+                  placeholder={dict.contact.phonePlaceholder}
                   className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-neutral-600 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
                 />
               </div>
 
               <div className="space-y-1.5">
                 <label htmlFor="message" className="text-xs font-mono uppercase text-neutral-400 font-medium">
-                  Project Details / Message <span className="text-emerald-400">*</span>
+                  {dict.contact.messageLabel} <span className="text-emerald-400">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -180,7 +182,7 @@ export default function ContactSection() {
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Tell me about your product requirements, timeline, or objectives..."
+                  placeholder={dict.contact.messagePlaceholder}
                   className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 text-white placeholder-neutral-600 text-sm focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                 />
               </div>
@@ -208,11 +210,11 @@ export default function ContactSection() {
                 {status === "loading" ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin text-neutral-800" />
-                    <span>Sending Inquiry...</span>
+                    <span>{dict.contact.sendingButton}</span>
                   </>
                 ) : (
                   <>
-                    <span>Send Message</span>
+                    <span>{dict.contact.sendButton}</span>
                     <Send className="w-4 h-4 text-neutral-800" />
                   </>
                 )}

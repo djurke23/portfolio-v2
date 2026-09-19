@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/site";
+import { useLanguage } from "@/context/LanguageContext";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import { FileText, ArrowUpRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,6 +15,17 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const { dict } = useLanguage();
+
+  const navItems = [
+    { label: dict.nav.work, href: "#work" },
+    { label: dict.nav.expertise, href: "#discipline" },
+    { label: dict.nav.stack, href: "#stack" },
+    { label: dict.nav.experience, href: "#experience" },
+    { label: dict.nav.about, href: "#about" },
+    { label: dict.nav.faq, href: "#faq" },
+    { label: dict.nav.contact, href: "#contact" },
+  ];
 
   const resolveHref = (href: string) => {
     if (isHome) return href;
@@ -69,7 +82,7 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-40 flex justify-center px-4 sm:px-6 pt-4 sm:pt-6 pointer-events-none">
       <nav
         aria-label="Main Navigation"
-        className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl transition-all duration-300 rounded-full px-5 py-3 ${
+        className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl transition-all duration-300 rounded-full px-4 sm:px-5 py-3 ${
           scrolled
             ? "glass-nav shadow-2xl shadow-black/60 py-2.5"
             : "bg-neutral-950/40 backdrop-blur-md border border-white/5 py-3.5"
@@ -78,7 +91,7 @@ export default function Navbar() {
         {/* Brand / Name */}
         <Link
           href="/"
-          className="group flex items-center gap-3 text-sm font-medium tracking-tight text-white hover:text-emerald-400 transition-colors"
+          className="group flex items-center gap-2.5 sm:gap-3 text-sm font-medium tracking-tight text-white hover:text-emerald-400 transition-colors"
           data-cursor="HOME"
         >
           <span className="font-semibold tracking-wide text-xs sm:text-sm uppercase font-mono">
@@ -86,18 +99,18 @@ export default function Navbar() {
           </span>
           <span className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-0.5 text-[11px] font-mono rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Available</span>
+            <span>{dict.nav.available}</span>
           </span>
         </Link>
 
         {/* Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center gap-1 text-[13px] text-neutral-400 font-medium">
-          {siteConfig.navItems.map((item) => (
+        <div className="hidden lg:flex items-center gap-0.5 text-[13px] text-neutral-400 font-medium">
+          {navItems.map((item) => (
             <a
               key={item.href}
               href={resolveHref(item.href)}
               onClick={(e) => handleNavClick(e, item.href)}
-              className="px-3 py-1.5 rounded-full hover:text-white hover:bg-white/5 transition-all"
+              className="px-2.5 py-1.5 rounded-full hover:text-white hover:bg-white/5 transition-all"
             >
               {item.label}
             </a>
@@ -105,7 +118,8 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Actions */}
-        <div className="hidden sm:flex items-center gap-3">
+        <div className="hidden sm:flex items-center gap-2 sm:gap-2.5">
+          <LanguageSwitcher variant="desktop" />
           <a
             href={siteConfig.socials.github}
             target="_blank"
@@ -129,11 +143,11 @@ export default function Navbar() {
           <a
             href={siteConfig.cvPath}
             download
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-mono font-medium rounded-full bg-white/5 hover:bg-white/10 text-neutral-200 hover:text-white border border-white/10 transition-all hover:scale-105 active:scale-95"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium rounded-full bg-white/5 hover:bg-white/10 text-neutral-200 hover:text-white border border-white/10 transition-all hover:scale-105 active:scale-95"
             data-cursor="CV"
           >
             <FileText className="w-3.5 h-3.5 text-emerald-400" />
-            <span>CV</span>
+            <span>{dict.nav.cv}</span>
             <ArrowUpRight className="w-3 h-3 text-neutral-400" />
           </a>
         </div>
@@ -142,7 +156,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label={mobileMenuOpen ? "Close menu" : "Open navigation menu"}
+          aria-label={mobileMenuOpen ? dict.nav.closeMenu : dict.nav.openMenu}
           aria-expanded={mobileMenuOpen}
           className="lg:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-1.5 rounded-full bg-white/5 hover:bg-white/10 text-neutral-300 hover:text-white transition-colors focus:outline-none"
         >
@@ -207,7 +221,7 @@ export default function Navbar() {
                   </span>
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-mono rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Available</span>
+                    <span>{dict.nav.available}</span>
                   </span>
                 </div>
 
@@ -215,22 +229,27 @@ export default function Navbar() {
                   type="button"
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 text-neutral-400 hover:text-white"
-                  aria-label="Close menu"
+                  aria-label={dict.nav.closeMenu}
                 >
                   <span className="text-lg leading-none">&times;</span>
                 </button>
               </div>
 
+              {/* Language Switcher in Mobile Drawer */}
+              <div className="pt-4">
+                <LanguageSwitcher variant="mobile" />
+              </div>
+
               {/* Staggered Navigation links */}
-              <div className="flex flex-col gap-2 py-6">
-                {siteConfig.navItems.map((item, index) => (
+              <div className="flex flex-col gap-1.5 py-5">
+                {navItems.map((item, index) => (
                   <motion.a
                     key={item.href}
                     href={resolveHref(item.href)}
                     onClick={(e) => handleNavClick(e, item.href)}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.05 * index + 0.08, duration: 0.25 }}
+                    transition={{ delay: 0.04 * index + 0.05, duration: 0.22 }}
                     className="py-2.5 px-3 rounded-xl text-lg font-medium tracking-tight text-neutral-300 hover:text-white hover:bg-white/5 transition-all flex items-center justify-between group"
                   >
                     <span>{item.label}</span>
@@ -253,7 +272,7 @@ export default function Navbar() {
                   className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white text-neutral-950 font-semibold text-sm hover:bg-neutral-200 transition-colors shadow-lg active:scale-98"
                 >
                   <FileText className="w-4 h-4 text-emerald-600" />
-                  <span>Download CV (PDF)</span>
+                  <span>{dict.nav.downloadCv}</span>
                   <ArrowUpRight className="w-4 h-4 text-neutral-700" />
                 </a>
 

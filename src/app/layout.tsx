@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/data/site";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
+import { LanguageProvider } from "@/context/LanguageContext";
 import CustomCursor from "@/components/layout/CustomCursor";
 import AmbientBackground from "@/components/ui/AmbientBackground";
 import BackToTop from "@/components/ui/BackToTop";
@@ -89,12 +90,14 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-screen bg-[#070709] text-[#f4f4f7] font-sans antialiased overflow-x-hidden selection:bg-emerald-500/30 selection:text-white"
       >
-        <SmoothScrollProvider>
-          <AmbientBackground />
-          <CustomCursor />
-          {children}
-          <BackToTop />
-        </SmoothScrollProvider>
+        <LanguageProvider>
+          <SmoothScrollProvider>
+            <AmbientBackground />
+            <CustomCursor />
+            {children}
+            <BackToTop />
+          </SmoothScrollProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

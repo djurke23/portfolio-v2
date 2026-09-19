@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { getSecondaryProjects } from "@/data/projects";
+import { useLanguage } from "@/context/LanguageContext";
 import { ProjectCategory } from "@/types";
 import { ExternalLink } from "lucide-react";
 import { GithubIcon, FigmaIcon } from "@/components/ui/SocialIcons";
@@ -11,13 +12,15 @@ import { GithubIcon, FigmaIcon } from "@/components/ui/SocialIcons";
 export default function ProjectMatrix() {
   const secondaryProjects = getSecondaryProjects();
   const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all");
+  const { language } = useLanguage();
+  const isSr = language === "sr";
 
   const filters: { label: string; value: ProjectCategory }[] = [
-    { label: "All Works", value: "all" },
-    { label: "Websites", value: "website" },
-    { label: "UI/UX & Design", value: "design" },
-    { label: "Web Apps", value: "web-app" },
-    { label: "Mobile Apps", value: "mobile-app" },
+    { label: isSr ? "Svi Radovi" : "All Works", value: "all" },
+    { label: isSr ? "Web Sajtovi" : "Websites", value: "website" },
+    { label: isSr ? "UI/UX & Dizajn" : "UI/UX & Design", value: "design" },
+    { label: isSr ? "Web Aplikacije" : "Web Apps", value: "web-app" },
+    { label: isSr ? "Mobilne Aplikacije" : "Mobile Apps", value: "mobile-app" },
   ];
 
   const filtered = secondaryProjects.filter((project) => {
@@ -30,13 +33,15 @@ export default function ProjectMatrix() {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
         <div className="space-y-3 max-w-xl">
           <div className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-semibold">
-            [03] Project Archive
+            {isSr ? "[03] Arhiva Projekata" : "[03] Project Archive"}
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
-            Client Implementations & Design Concepts
+            {isSr ? "Klijentske Implementacije i Dizajn Koncepti" : "Client Implementations & Design Concepts"}
           </h2>
           <p className="text-sm sm:text-base text-neutral-400 font-light">
-            Additional commercial websites, UI systems, and client delivery projects.
+            {isSr
+              ? "Dodatni komercijalni web sajtovi, UI sistemi i projekti isporučeni za klijente."
+              : "Additional commercial websites, UI systems, and client delivery projects."}
           </p>
         </div>
 

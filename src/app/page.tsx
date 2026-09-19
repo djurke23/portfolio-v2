@@ -8,6 +8,7 @@ import EngineeringDesign from "@/components/sections/EngineeringDesign";
 import TechStackSection from "@/components/sections/TechStackSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
 import AboutSection from "@/components/sections/AboutSection";
+import FAQSection from "@/components/sections/FAQSection";
 import ContactSection from "@/components/sections/ContactSection";
 import Footer from "@/components/layout/Footer";
 
@@ -43,7 +44,10 @@ export default function Home() {
         {/* 8. Education & Academic Background */}
         <AboutSection />
 
-        {/* 9. Contact & Inquiries */}
+        {/* 9. Frequently Asked Questions */}
+        <FAQSection />
+
+        {/* 10. Contact & Inquiries */}
         <ContactSection />
       </main>
 

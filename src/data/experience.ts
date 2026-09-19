@@ -19,6 +19,35 @@ export const experiences: Experience[] = [
     technologies: ["Next.js", "React Native", "TypeScript", "Tailwind CSS", "Go", "Supabase", "PostgreSQL", "Cloudflare", "Figma"],
   },
   {
+    id: "pink-robotics",
+    period: "2025 — 2026",
+    role: "Robotics Operator — Broadcast Robotics Support",
+    company: "Pink Media Group",
+    location: "Belgrade, Serbia",
+    type: "Broadcast Robotics",
+    description:
+      "Part of the technical crew for live television integration of Unitree G1 humanoid platforms and Unitree Go2 quadruped platform in broadcast production. Studio motion operation, safety protocols, video routing, and real-time director synchronization.",
+    responsibilities: [
+      "Remote teleoperation and kinematic motion control of humanoid (Unitree G1) and quadruped (Unitree Go2) robotic platforms in live TV studio environments.",
+      "Execution of rigorous studio safety protocols, emergency fail-safes, and battery telemetry monitoring during live broadcasts.",
+      "Video signal routing from onboard robotic camera feeds and low-latency synchronization with the master control room and director.",
+      "Calibration of movement routines, obstacle navigation around complex stage sets, and dynamic on-air interactions with television talent.",
+    ],
+    technologies: [
+      "Unitree G1 Humanoid",
+      "Unitree Go2 Quadruped",
+      "Remote Teleoperation",
+      "Robot Kinematics",
+      "Live TV Broadcast",
+      "Video Signal Routing",
+      "Studio Safety Protocols",
+    ],
+    broadcastContext: {
+      isLive: true,
+      tags: ["BROADCAST ROBOTICS", "UNITREE G1 & GO2", "LIVE INTEGRATION"],
+    },
+  },
+  {
     id: "dms",
     period: "2024 — 2025",
     role: "Web Application Developer",

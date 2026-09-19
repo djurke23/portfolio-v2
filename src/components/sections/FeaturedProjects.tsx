@@ -4,19 +4,40 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getFeaturedProjects } from "@/data/projects";
+import { useLanguage } from "@/context/LanguageContext";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { ArrowUpRight, ArrowRight, Smartphone, ExternalLink, Layers } from "lucide-react";
 
+const srProjectTexts: Record<string, { tagline: string; description: string; categoryLabel: string }> = {
+  carflo: {
+    tagline: "Vrhunski digitalni dnevnik troškova i održavanja vozila za iOS.",
+    description: "Kompletna mobilna platforma za praćenje troškova i servisa vozila dostupna na Apple App Store-u sa offline sinhronizacijom.",
+    categoryLabel: "Mobilna & Cloud Platforma",
+  },
+  fluffyflowers: {
+    tagline: "Premijum e-commerce cvećara i radionica sa real-time porudžbinama.",
+    description: "Digitalna prodavnica i katalog cvetnih aranžmana sa integrisanim sistemom naručivanja i responzivnim dizajnom.",
+    categoryLabel: "E-Commerce & Brand Platforma",
+  },
+  "rev-and-chill": {
+    tagline: "Zajednica entuzijasta automobilske kulture i digitalni medij.",
+    description: "Interaktivna web platforma za ljubitelje automobilske kulture, manifestacije i multimedijalni sadržaj.",
+    categoryLabel: "Web Platforma & Zajednica",
+  },
+};
+
 export default function FeaturedProjects() {
   const featured = getFeaturedProjects();
+  const { dict, language } = useLanguage();
+  const isSr = language === "sr";
 
   return (
     <section id="work" className="py-24 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
       <SectionHeader
         number="02"
-        category="Featured Work"
-        title="Production Digital Products & Case Studies"
-        description="Flagship full-stack platforms and mobile applications engineered from concept to deployment. Click through for in-depth engineering breakdowns."
+        category={dict.featured.eyebrow}
+        title={dict.featured.title}
+        description={dict.featured.description}
       />
 
       <div className="space-y-24 sm:space-y-36">
@@ -42,7 +63,9 @@ export default function FeaturedProjects() {
                   </span>
                   <span className="text-neutral-600">•</span>
                   <span className="text-neutral-400 uppercase tracking-wider">
-                    {project.categoryLabel}
+                    {isSr && srProjectTexts[project.id]?.categoryLabel
+                      ? srProjectTexts[project.id].categoryLabel
+                      : project.categoryLabel}
                   </span>
                   <span className="text-neutral-600">•</span>
                   <span className="text-neutral-500">{project.year}</span>
@@ -54,13 +77,17 @@ export default function FeaturedProjects() {
                     {project.title}
                   </h3>
                   <p className="text-base sm:text-lg text-emerald-400/90 font-medium">
-                    {project.tagline}
+                    {isSr && srProjectTexts[project.id]?.tagline
+                      ? srProjectTexts[project.id].tagline
+                      : project.tagline}
                   </p>
                 </div>
 
                 {/* Description */}
                 <p className="text-sm sm:text-base text-neutral-400 leading-relaxed font-light">
-                  {project.description}
+                  {isSr && srProjectTexts[project.id]?.description
+                    ? srProjectTexts[project.id].description
+                    : project.description}
                 </p>
 
                 {/* Tech Chips */}
@@ -82,7 +109,7 @@ export default function FeaturedProjects() {
                       href={`/projects/${project.id}`}
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-neutral-950 font-medium text-xs sm:text-sm hover:bg-neutral-200 transition-all shadow-md active:scale-95 group"
                     >
-                      <span>Read Case Study</span>
+                      <span>{dict.featured.viewCaseStudy}</span>
                       <ArrowRight className="w-4 h-4 text-neutral-700 group-hover:translate-x-0.5 transition-transform" />
                     </Link>
                   )}
@@ -95,7 +122,7 @@ export default function FeaturedProjects() {
                       className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white/5 hover:bg-white/10 text-white text-xs sm:text-sm font-medium border border-white/10 transition-all"
                     >
                       <Smartphone className="w-4 h-4 text-emerald-400" />
-                      <span>App Store</span>
+                      <span>{dict.featured.appStore}</span>
                       <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400" />
                     </a>
                   )}
@@ -108,7 +135,7 @@ export default function FeaturedProjects() {
                       className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white/5 hover:bg-white/10 text-white text-xs sm:text-sm font-medium border border-white/10 transition-all"
                     >
                       <ExternalLink className="w-4 h-4 text-neutral-400" />
-                      <span>Live Site</span>
+                      <span>{dict.featured.livePreview}</span>
                       <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400" />
                     </a>
                   )}

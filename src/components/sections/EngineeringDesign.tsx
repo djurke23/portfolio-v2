@@ -1,65 +1,33 @@
 "use client";
 
 import React from "react";
+import { useLanguage } from "@/context/LanguageContext";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { Terminal, Layers, PlaySquare, Compass } from "lucide-react";
 
 export default function EngineeringDesign() {
-  const pillars = [
-    {
-      id: "code",
-      title: "CODE",
-      eyebrow: "Engineering Discipline",
-      icon: Terminal,
-      description:
-        "Architecting resilient systems using TypeScript, Go, Next.js, and PostgreSQL. Focused on clean separation of concerns, edge database caching, and type safety from database to UI.",
-      tags: ["Full-Stack Architecture", "Type-Safe APIs", "Edge Infrastructure", "Mobile Engines"],
-      accent: "from-emerald-500/20 to-transparent",
-    },
-    {
-      id: "design",
-      title: "DESIGN",
-      eyebrow: "UI/UX & Systems",
-      icon: Layers,
-      description:
-        "Building cohesive design systems in Figma with meticulous spacing, strict token hierarchies, and ergonomic layout systems. Crafting interfaces that look expensive and feel effortless.",
-      tags: ["Figma Design Systems", "Responsive Layouts", "Ergonomic UI", "Editorial Typography"],
-      accent: "from-blue-500/20 to-transparent",
-    },
-    {
-      id: "motion",
-      title: "MOTION",
-      eyebrow: "Broadcast & Kinetics",
-      icon: PlaySquare,
-      description:
-        "Leveraging years of live broadcast video mixing, post-production in Premiere & After Effects, and CSS/Framer physics. Motion applied with restraint to clarify context rather than distract.",
-      tags: ["Hardware Compositing", "Micro-Interactions", "Video Post-Production", "Fluid Transitions"],
-      accent: "from-purple-500/20 to-transparent",
-    },
-    {
-      id: "product",
-      title: "PRODUCT",
-      eyebrow: "Full Lifecycle Delivery",
-      icon: Compass,
-      description:
-        "Navigating products from blank canvas to App Store validation and Vercel edge releases. Balancing engineering rigor with real-world usability and client business goals.",
-      tags: ["End-to-End Delivery", "App Store Pipelines", "In-App Subscriptions", "SEO & Optimization"],
-      accent: "from-cyan-500/20 to-transparent",
-    },
-  ];
+  const { dict } = useLanguage();
+
+  const pillarMeta: Record<string, { icon: typeof Terminal; accent: string }> = {
+    code: { icon: Terminal, accent: "from-emerald-500/20 to-transparent" },
+    design: { icon: Layers, accent: "from-blue-500/20 to-transparent" },
+    motion: { icon: PlaySquare, accent: "from-purple-500/20 to-transparent" },
+    product: { icon: Compass, accent: "from-cyan-500/20 to-transparent" },
+  };
 
   return (
     <section id="discipline" className="py-24 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
       <SectionHeader
         number="04"
-        category="Differentiator"
-        title="Engineering + Design + Motion"
-        description="A rare convergence of rigorous full-stack development, professional UI/UX design, and broadcast video production. I don't just write code — I build complete digital products."
+        category={dict.discipline.eyebrow}
+        title={dict.discipline.title}
+        description={dict.discipline.description}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {pillars.map((pillar) => {
-          const Icon = pillar.icon;
+        {dict.discipline.pillars.map((pillar) => {
+          const meta = pillarMeta[pillar.id] || { icon: Terminal, accent: "from-emerald-500/20 to-transparent" };
+          const Icon = meta.icon;
           return (
             <div
               key={pillar.id}
@@ -67,7 +35,7 @@ export default function EngineeringDesign() {
             >
               {/* Subtle Ambient Gradient Corner */}
               <div
-                className={`absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl ${pillar.accent} blur-2xl pointer-events-none opacity-40 group-hover:opacity-80 transition-opacity`}
+                className={`absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl ${meta.accent} blur-2xl pointer-events-none opacity-40 group-hover:opacity-80 transition-opacity`}
               />
 
               <div className="space-y-5 relative z-10">
