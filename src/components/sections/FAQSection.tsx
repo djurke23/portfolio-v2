@@ -20,7 +20,7 @@ export default function FAQSection() {
       className="py-24 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5"
     >
       <SectionHeader
-        number="08"
+        number="11"
         category={dict.faq.eyebrow}
         title={dict.faq.title}
         description={dict.faq.description}

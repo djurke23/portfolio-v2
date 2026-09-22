@@ -55,7 +55,7 @@ export default function AboutSection() {
   return (
     <section id="about" className="py-24 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
       <SectionHeader
-        number="07"
+        number="08"
         category={dict.about.eyebrow}
         title={dict.about.title}
         description={dict.about.description}
@@ -88,6 +88,20 @@ export default function AboutSection() {
           <div className="space-y-4 text-sm sm:text-base text-neutral-300 font-light leading-relaxed">
             <p>{dict.about.bioP1}</p>
             <p>{dict.about.bioP2}</p>
+            <p>{dict.about.bioP3}</p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 pt-1">
+            {["Clean Architecture", "Zero-Downtime Reliability", "High-Performance UX", "Product Craft"].map(
+              (tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-400"
+                >
+                  {tag}
+                </span>
+              )
+            )}
           </div>
 
           <div className="pt-2">

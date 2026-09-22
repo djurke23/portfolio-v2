@@ -3,10 +3,29 @@
 import React, { useState } from "react";
 import { siteConfig } from "@/data/site";
 import { useLanguage } from "@/context/LanguageContext";
-import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { useToast } from "@/context/ToastContext";
+import { useSound } from "@/context/SoundContext";
+import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Loader2, Copy, Check } from "lucide-react";
+import { InstagramIcon } from "@/components/ui/SocialIcons";
 
 export default function ContactSection() {
-  const { dict } = useLanguage();
+  const { dict, language } = useLanguage();
+  const { copyEmail } = useToast();
+  const { playSuccess, playClick } = useSound();
+  const [copied, setCopied] = useState(false);
+  const isSr = language === "sr";
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    playSuccess();
+    copyEmail(
+      siteConfig.email,
+      isSr ? "Email kopiran u clipboard!" : "Email copied to clipboard!"
+    );
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -60,7 +79,7 @@ export default function ContactSection() {
         <div className="lg:col-span-5 space-y-8">
           <div className="space-y-4">
             <div className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-semibold">
-              [09] {dict.contact.eyebrow}
+              [12] {dict.contact.eyebrow}
             </div>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white uppercase font-mono leading-[1.05]">
               {dict.contact.title}
@@ -71,18 +90,33 @@ export default function ContactSection() {
           </div>
 
           <div className="space-y-4 pt-4 border-t border-white/5">
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="flex items-center gap-3 text-neutral-300 hover:text-white transition-colors group"
-            >
-              <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 group-hover:border-emerald-500/30 transition-colors">
-                <Mail className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="text-xs font-mono text-neutral-500 uppercase">{dict.contact.directEmail}</div>
-                <div className="text-sm font-medium text-white">{siteConfig.email}</div>
-              </div>
-            </a>
+            {/* Email item with clickable mailto and quick copy button */}
+            <div className="flex items-center justify-between p-2 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/15 transition-all group">
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="flex items-center gap-3 text-neutral-300 hover:text-white transition-colors flex-1 min-w-0 pr-2"
+              >
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 group-hover:border-emerald-500/30 transition-colors shrink-0">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xs font-mono text-neutral-500 uppercase">{dict.contact.directEmail}</div>
+                  <div className="text-sm font-medium text-white truncate">{siteConfig.email}</div>
+                </div>
+              </a>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="p-2.5 rounded-xl text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 border border-transparent hover:border-emerald-500/20 transition-all shrink-0"
+                title={isSr ? "Kopiraj email" : "Copy email address"}
+              >
+                {copied ? (
+                  <Check className="w-4 h-4 text-emerald-400" />
+                ) : (
+                  <Copy className="w-4 h-4" />
+                )}
+              </button>
+            </div>
 
             <a
               href={`tel:${siteConfig.phone}`}
@@ -94,6 +128,21 @@ export default function ContactSection() {
               <div>
                 <div className="text-xs font-mono text-neutral-500 uppercase">{dict.contact.telephone}</div>
                 <div className="text-sm font-medium text-white">{siteConfig.phone}</div>
+              </div>
+            </a>
+
+            <a
+              href={siteConfig.socials.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-neutral-300 hover:text-white transition-colors group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 group-hover:border-emerald-500/30 transition-colors">
+                <InstagramIcon className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="text-xs font-mono text-neutral-500 uppercase">Instagram</div>
+                <div className="text-sm font-medium text-white">@djurke23</div>
               </div>
             </a>
 

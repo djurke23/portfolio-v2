@@ -3,10 +3,15 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/data/site";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
+import { ThemeProvider } from "@/context/ThemeContext";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { ToastProvider } from "@/context/ToastContext";
+import { SoundProvider } from "@/context/SoundContext";
 import CustomCursor from "@/components/layout/CustomCursor";
 import AmbientBackground from "@/components/ui/AmbientBackground";
 import BackToTop from "@/components/ui/BackToTop";
+import CommandPalette from "@/components/ui/CommandPalette";
+import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -74,6 +79,56 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://lukadjuric.dev/#person",
+      name: "Luka Đurić",
+      jobTitle: "Full-Stack Developer & Product Craftsman",
+      url: "https://lukadjuric.dev",
+      image: "https://lukadjuric.dev/assets/images/portfolio-v1.png",
+      email: "mailto:lukadjuricdjurke@pm.me",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Belgrade",
+        addressCountry: "Serbia",
+      },
+      sameAs: [
+        siteConfig.socials.github,
+        siteConfig.socials.linkedin,
+        siteConfig.socials.instagram,
+      ].filter(Boolean),
+      knowsAbout: [
+        "Full-Stack Web Development",
+        "Next.js",
+        "React",
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "Go",
+        "React Native",
+        "Tailwind CSS",
+        "PostgreSQL",
+        "REST APIs",
+        "UI/UX Design",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://lukadjuric.dev/#website",
+      url: "https://lukadjuric.dev",
+      name: siteConfig.name,
+      description: siteConfig.description,
+      publisher: {
+        "@id": "https://lukadjuric.dev/#person",
+      },
+      inLanguage: ["en", "sr"],
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -86,18 +141,52 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} dark`}
       data-scroll-behavior="smooth"
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var t = localStorage.getItem('portfolio_theme');
+                  if (t === 'light') {
+                    document.documentElement.classList.add('light');
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.style.colorScheme = 'light';
+                  } else {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.style.colorScheme = 'dark';
+                  }
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         suppressHydrationWarning
         className="min-h-screen bg-[#070709] text-[#f4f4f7] font-sans antialiased overflow-x-hidden selection:bg-emerald-500/30 selection:text-white"
       >
-        <LanguageProvider>
-          <SmoothScrollProvider>
-            <AmbientBackground />
-            <CustomCursor />
-            {children}
-            <BackToTop />
-          </SmoothScrollProvider>
-        </LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            <SoundProvider>
+              <ToastProvider>
+                <SmoothScrollProvider>
+                  <ScrollProgressBar />
+                  <AmbientBackground />
+                  <CustomCursor />
+                  {children}
+                  <BackToTop />
+                  <CommandPalette />
+                </SmoothScrollProvider>
+              </ToastProvider>
+            </SoundProvider>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

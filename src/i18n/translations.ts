@@ -3,10 +3,13 @@ export type Language = "en" | "sr";
 export interface TranslationSchema {
   nav: {
     work: string;
+    services: string;
     expertise: string;
     stack: string;
     experience: string;
     about: string;
+    gear: string;
+    testimonials: string;
     faq: string;
     contact: string;
     available: string;
@@ -14,6 +17,29 @@ export interface TranslationSchema {
     downloadCv: string;
     closeMenu: string;
     openMenu: string;
+  };
+  stats: {
+    eyebrow: string;
+    title: string;
+    subtext: string;
+  };
+  services: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    ctaButton: string;
+  };
+  gear: {
+    eyebrow: string;
+    title: string;
+    description: string;
+  };
+  testimonials: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    satisfactionScore: string;
+    satisfactionNote: string;
   };
   hero: {
     availability: string;
@@ -95,6 +121,7 @@ export interface TranslationSchema {
     location: string;
     bioP1: string;
     bioP2: string;
+    bioP3: string;
     downloadCv: string;
     academicEyebrow: string;
     academicTitle: string;
@@ -150,10 +177,13 @@ export const translations: Record<Language, TranslationSchema> = {
   en: {
     nav: {
       work: "Work",
+      services: "Services",
       expertise: "Expertise",
       stack: "Stack",
       experience: "Experience",
       about: "About",
+      gear: "Gear",
+      testimonials: "Reviews",
       faq: "FAQ",
       contact: "Contact",
       available: "Available",
@@ -161,6 +191,29 @@ export const translations: Record<Language, TranslationSchema> = {
       downloadCv: "Download CV (PDF)",
       closeMenu: "Close menu",
       openMenu: "Open navigation menu",
+    },
+    stats: {
+      eyebrow: "Measurable Impact",
+      title: "Proven Track Record Across Systems & Products",
+      subtext: "Engineering scalable solutions with high reliability, clean architecture, and direct business results.",
+    },
+    services: {
+      eyebrow: "What I Deliver",
+      title: "Bespoke Services & Product Capabilities",
+      description: "From concept architecture and UI/UX systems to full-stack code and App Store releases.",
+      ctaButton: "Discuss a Project",
+    },
+    gear: {
+      eyebrow: "Studio Setup & Equipment",
+      title: "The Hardware Behind the Craft",
+      description: "Carefully selected workstation, mobile devices, optical lenses, and audio gear powering daily software engineering and media production.",
+    },
+    testimonials: {
+      eyebrow: "Client Endorsements",
+      title: "What Founders & Collaborators Say",
+      description: "Direct feedback from founders, executives, and clients on delivery speed, architectural quality, and aesthetic precision.",
+      satisfactionScore: "100%",
+      satisfactionNote: "Client satisfaction across freelance and contract engagements.",
     },
     hero: {
       availability: "Available for full-stack opportunities",
@@ -292,6 +345,8 @@ export const translations: Record<Language, TranslationSchema> = {
         "I am a Full-Stack Developer with over 6 years of practical experience creating modern, high-performance web applications and digital products.",
       bioP2:
         "My journey bridges rigorous software engineering with years in live broadcast media production. This unique combination gives me high standards for zero-downtime reliability, real-time performance, and visual polish.",
+      bioP3:
+        "From designing low-latency architectures and scalable database schemas to crafting fluid, responsive interfaces with micro-interactions, I treat every project with a craftsman's precision. My focus is always on delivering measurable business value and an uncompromising user experience.",
       downloadCv: "Download Official CV (PDF)",
       academicEyebrow: "Verified Academic Record",
       academicTitle: "Higher Education & Qualifications",
@@ -336,6 +391,26 @@ export const translations: Record<Language, TranslationSchema> = {
           answer:
             "Yes. For projects like CarFlo, I managed the entire release pipeline: from TypeScript/React Native implementation and native device bridges to App Store Connect submission, RevenueCat in-app subscriptions, and TestFlight beta cycles.",
         },
+        {
+          question: "What does the collaboration process look like from start to finish?",
+          answer:
+            "The journey begins with an initial consultation where we analyze your goals, technical scope, and timelines. Next, I produce wireframes, UI/UX clickable prototypes, and an architectural specification. Development proceeds in agile, transparent sprints with live staging previews, culminating in thorough testing, launch deployment, and knowledge transfer.",
+        },
+        {
+          question: "How long does it typically take to deliver a project?",
+          answer:
+            "Turnaround depends directly on scope and complexity. Lean corporate websites and high-impact landing pages are typically delivered within 1 to 3 weeks. Comprehensive full-stack platforms, customized SaaS products, and native mobile apps usually range from 4 to 8 weeks.",
+        },
+        {
+          question: "Do you offer post-launch maintenance, security, and updates?",
+          answer:
+            "Yes, absolutely. I offer structured monthly maintenance and support retainers covering continuous cloud monitoring, security patching, dependency upgrades, feature iterations, performance tuning, and on-demand technical guidance.",
+        },
+        {
+          question: "How is pricing and payment structured?",
+          answer:
+            "Projects are typically structured around milestone-based phases — typically 50% upfront upon agreement and 50% upon final acceptance before production deployment. For longer-term or enterprise projects, flexible installment schedules or monthly retainers can be tailored.",
+        },
       ],
     },
     contact: {
@@ -377,10 +452,13 @@ export const translations: Record<Language, TranslationSchema> = {
   sr: {
     nav: {
       work: "Radovi",
+      services: "Usluge",
       expertise: "Ekspertiza",
       stack: "Stack",
       experience: "Iskustvo",
       about: "O meni",
+      gear: "Oprema",
+      testimonials: "Recenzije",
       faq: "FAQ",
       contact: "Kontakt",
       available: "Dostupan",
@@ -388,6 +466,29 @@ export const translations: Record<Language, TranslationSchema> = {
       downloadCv: "Preuzmi CV (PDF)",
       closeMenu: "Zatvori meni",
       openMenu: "Otvori navigaciju",
+    },
+    stats: {
+      eyebrow: "Merljiv Uticaj",
+      title: "Dokazani Rezultati Kroz Produkte i Sisteme",
+      subtext: "Razvoj skalabilnih softverskih rešenja sa visokom pouzdanošću, čistom arhitekturom i opipljivim poslovnim rezultatima.",
+    },
+    services: {
+      eyebrow: "Šta Pružam",
+      title: "Specijalizovane Usluge i Isporuka Proizvoda",
+      description: "Od idejnog koncepta i UI/UX dizajna do produkcionog koda, baza podataka i lansiranja na App Store.",
+      ctaButton: "Zakažite Konsultaciju",
+    },
+    gear: {
+      eyebrow: "Radno Okruženje i Oprema",
+      title: "Hardver i Studio Iza Koda",
+      description: "Pažljivo selektovana radna stanica, mobilni uređaji, optika i audio oprema koji pokreću svakodnevno programiranje i multimedijalnu produkciju.",
+    },
+    testimonials: {
+      eyebrow: "Šta Kažu Klijenti",
+      title: "Iskustva Koja Pokreću Rast i Inovacije",
+      description: "Autentični utisci osnivača kompanija, direktora i saradnika o brzini isporuke, kvalitetu arhitekture i posvećenosti detaljima.",
+      satisfactionScore: "100%",
+      satisfactionNote: "Zadovoljstvo klijenata na svim dosadašnjim ugovornim i freelance projektima.",
     },
     hero: {
       availability: "Dostupan za nove projekte i pozicije",
@@ -519,6 +620,8 @@ export const translations: Record<Language, TranslationSchema> = {
         "Ja sam Full-Stack Developer sa preko 6 godina praktičnog iskustva u izradi modernih web aplikacija i digitalnih proizvoda visokih performansi.",
       bioP2:
         "Moj put spaja pedantno softversko inženjerstvo sa godinama rada u televizijskoj produkciji uživo. Ova kombinacija donosi visoke standarde za pouzdanost bez prekida rada, brzinu u realnom vremenu i vizuelnu perfekciju.",
+      bioP3:
+        "Od projektovanja arhitektura niske latencije i optimizovanih baza podataka, do kreiranja fluidnih interfejsa sa responzivnim mikro-animacijama, svakom projektu pristupam sa zanatskom posvećenošću. Moj fokus je uvek na isporuci merljive vrednosti za klijenta i besprekornom korisničkom doživljaju.",
       downloadCv: "Preuzmi Zvanični CV (PDF)",
       academicEyebrow: "Akademska Pozadina",
       academicTitle: "Visoko Obrazovanje i Kvalifikacije",
@@ -562,6 +665,26 @@ export const translations: Record<Language, TranslationSchema> = {
           question: "Da li razvijaš i objavljuješ nativne mobilne aplikacije na App Store?",
           answer:
             "Da. Na primer, za projekat CarFlo sam vodio ceo proces: od implementacije u TypeScript/React Native okruženju do publikacije na Apple App Store, konfiguracije RevenueCat pretplata i TestFlight beta testiranja.",
+        },
+        {
+          question: "Kako izgleda proces saradnje od početka do kraja?",
+          answer:
+            "Proces počinje inicijalnim konsultacijama gde detaljno analiziramo vaše potrebe, ciljeve i tehničke zahteve. Zatim kreiram plan rada, žičane modele (wireframes) i dizajn predloge u Figmi. Razvoj se odvija u fazama uz redovan uvid u napredak na testnom serveru, a finalni proizvod se isporučuje na produkciju nakon testiranja i vaše potvrde.",
+        },
+        {
+          question: "Koliko vremena je okvirno potrebno za izradu projekta?",
+          answer:
+            "Vreme izrade zavisi od obima i kompleksnosti projekta. Pregledni korporativni sajtovi i prodajne landing stranice obično se završavaju za 1 do 3 nedelje, dok kompleksnije web aplikacije, SaaS platforme i mobilne aplikacije traju između 4 i 8 nedelja.",
+        },
+        {
+          question: "Da li nudite pakete održavanja i tehničku podršku nakon lansiranja?",
+          answer:
+            "Da. Nudim fleksibilne mesečne pakete održavanja koji obuhvataju redovno ažuriranje sadržaja, sigurnosne zakrpe, nadogradnju zavisnosti, optimizaciju brzine, monitoring rada bez prekida (uptime) i tehničku podršku.",
+        },
+        {
+          question: "Kako funkcioniše plaćanje i finansijska dinamika?",
+          answer:
+            "Plaćanje se standardno vrši u fazama — najčešće 50% avansa pre početka radova i 50% po završetku i odobrenju projekta. Prihvatam bankarski transfer (faktura za pravna lica) i PayPal, a za veće projekte moguće je dogovoriti i plaćanje u više mesečnih rata.",
         },
       ],
     },

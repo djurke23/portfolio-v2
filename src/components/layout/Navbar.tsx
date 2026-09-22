@@ -6,8 +6,11 @@ import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/site";
 import { useLanguage } from "@/context/LanguageContext";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+import SoundToggle from "@/components/ui/SoundToggle";
+import ThemeToggle from "@/components/ui/ThemeToggle";
+import { useSound } from "@/context/SoundContext";
 import { FileText, ArrowUpRight } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/ui/SocialIcons";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
@@ -16,14 +19,17 @@ export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const { dict } = useLanguage();
+  const { playClick, playToggle } = useSound();
 
   const navItems = [
     { label: dict.nav.work, href: "#work" },
+    { label: dict.nav.services, href: "#services" },
     { label: dict.nav.expertise, href: "#discipline" },
     { label: dict.nav.stack, href: "#stack" },
     { label: dict.nav.experience, href: "#experience" },
     { label: dict.nav.about, href: "#about" },
-    { label: dict.nav.faq, href: "#faq" },
+    { label: dict.nav.gear, href: "#gear" },
+    { label: dict.nav.testimonials, href: "#testimonials" },
     { label: dict.nav.contact, href: "#contact" },
   ];
 
@@ -33,6 +39,7 @@ export default function Navbar() {
   };
 
   const handleNavClick = (e?: React.MouseEvent<HTMLAnchorElement>, targetHref?: string) => {
+    playClick();
     setMobileMenuOpen(false);
     if (e && isHome && targetHref?.startsWith("#")) {
       const el = document.querySelector(targetHref);
@@ -118,7 +125,9 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Actions */}
-        <div className="hidden sm:flex items-center gap-2 sm:gap-2.5">
+        <div className="hidden sm:flex items-center gap-1.5 sm:gap-2">
+          <ThemeToggle />
+          <SoundToggle />
           <LanguageSwitcher variant="desktop" />
           <a
             href={siteConfig.socials.github}
@@ -141,6 +150,16 @@ export default function Navbar() {
             <LinkedinIcon className="w-4 h-4" />
           </a>
           <a
+            href={siteConfig.socials.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram Profile"
+            className="p-2 rounded-full text-neutral-400 hover:text-white hover:bg-white/5 transition-colors"
+            data-cursor="INSTAGRAM"
+          >
+            <InstagramIcon className="w-4 h-4" />
+          </a>
+          <a
             href={siteConfig.cvPath}
             download
             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium rounded-full bg-white/5 hover:bg-white/10 text-neutral-200 hover:text-white border border-white/10 transition-all hover:scale-105 active:scale-95"
@@ -155,7 +174,10 @@ export default function Navbar() {
         {/* Animated Mobile Hamburger Button */}
         <button
           type="button"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          onClick={() => {
+            playToggle();
+            setMobileMenuOpen(!mobileMenuOpen);
+          }}
           aria-label={mobileMenuOpen ? dict.nav.closeMenu : dict.nav.openMenu}
           aria-expanded={mobileMenuOpen}
           className="lg:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-1.5 rounded-full bg-white/5 hover:bg-white/10 text-neutral-300 hover:text-white transition-colors focus:outline-none"
@@ -235,9 +257,13 @@ export default function Navbar() {
                 </button>
               </div>
 
-              {/* Language Switcher in Mobile Drawer */}
-              <div className="pt-4">
+              {/* Language Switcher, Theme Toggle & Sound Toggle in Mobile Drawer */}
+              <div className="pt-4 flex items-center justify-between gap-3">
                 <LanguageSwitcher variant="mobile" />
+                <div className="flex items-center gap-2">
+                  <ThemeToggle className="bg-white/5 border border-white/10" />
+                  <SoundToggle className="bg-white/5 border border-white/10" />
+                </div>
               </div>
 
               {/* Staggered Navigation links */}
@@ -294,6 +320,15 @@ export default function Navbar() {
                   >
                     <LinkedinIcon className="w-4 h-4" />
                     <span>LinkedIn</span>
+                  </a>
+                  <a
+                    href={siteConfig.socials.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-white text-xs font-mono py-1 px-2 rounded-lg hover:bg-white/5 transition-colors"
+                  >
+                    <InstagramIcon className="w-4 h-4" />
+                    <span>Instagram</span>
                   </a>
                 </div>
               </motion.div>

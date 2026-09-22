@@ -96,6 +96,279 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* ==========================================================================
+   LIGHT MODE DESIGN SYSTEM
+   Titanium paper aesthetic inspired by Apple & Linear
+   ========================================================================== */
+html.light {
+  color-scheme: light;
+}
+
+html.light,
+html.light body {
+  background-color: #f8f9fc !important;
+  color: #090a0f !important;
+}
+
+html.light ::selection {
+  background-color: rgba(16, 185, 129, 0.25) !important;
+  color: #064e3b !important;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #f8f9fc !important;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
+}
+
+/* Background overrides in light mode */
+html.light .bg-\[\#070709\],
+html.light .bg-\[\#0e0e12\],
+html.light .bg-\[\#131318\] {
+  background-color: #f8f9fc !important;
+}
+
+html.light .bg-neutral-950,
+html.light .bg-neutral-900 {
+  background-color: #ffffff !important;
+}
+
+html.light .bg-neutral-950\/40,
+html.light .bg-neutral-950\/60,
+html.light .bg-neutral-950\/80,
+html.light .bg-neutral-950\/90,
+html.light .bg-neutral-950\/95 {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+
+html.light .bg-neutral-900\/50,
+html.light .bg-neutral-900\/60,
+html.light .bg-neutral-900\/80,
+html.light .bg-neutral-900\/85 {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+
+html.light .bg-white\/5,
+html.light .bg-white\/\[0\.02\],
+html.light .bg-white\/\[0\.03\],
+html.light .bg-white\/\[0\.04\] {
+  background-color: rgba(0, 0, 0, 0.035) !important;
+}
+
+html.light .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.065) !important;
+}
+
+html.light .hover\:bg-white\/5:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light .hover\:bg-white\/10:hover {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Borders in light mode */
+html.light .border-white\/5,
+html.light .border-white\/10,
+html.light .border-white\/15 {
+  border-color: rgba(0, 0, 0, 0.075) !important;
+}
+
+html.light .border-white\/20,
+html.light .border-white\/30 {
+  border-color: rgba(0, 0, 0, 0.14) !important;
+}
+
+html.light .hover\:border-white\/20:hover,
+html.light .hover\:border-white\/30:hover {
+  border-color: rgba(0, 0, 0, 0.18) !important;
+}
+
+html.light .divide-white\/5,
+html.light .divide-white\/10 {
+  border-color: rgba(0, 0, 0, 0.07) !important;
+}
+
+/* Glass components in light mode */
+html.light .glass-nav {
+  background: rgba(255, 255, 255, 0.84) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.07), 0 0 1px 1px rgba(0, 0, 0, 0.03) !important;
+}
+
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 0, 0, 0.07) !important;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+html.light .glass-card:hover {
+  background: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.14) !important;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Typography in light mode */
+html.light .text-white {
+  color: #090a0f !important;
+}
+
+html.light .text-neutral-100,
+html.light .text-neutral-200 {
+  color: #1e293b !important;
+}
+
+html.light .text-neutral-300 {
+  color: #334155 !important;
+}
+
+html.light .text-neutral-400 {
+  color: #475569 !important;
+}
+
+html.light .text-neutral-500 {
+  color: #64748b !important;
+}
+
+html.light .text-neutral-600 {
+  color: #94a3b8 !important;
+}
+
+html.light .hover\:text-white:hover {
+  color: #090a0f !important;
+}
+
+html.light .text-gradient {
+  background: linear-gradient(135deg, #090a0f 0%, #475569 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+html.light .text-gradient-emerald {
+  background: linear-gradient(135deg, #059669 0%, #0284c7 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Emerald accents with WCAG AAA contrast */
+html.light .text-emerald-400 {
+  color: #059669 !important;
+}
+
+html.light .text-emerald-300 {
+  color: #047857 !important;
+}
+
+html.light .text-emerald-500 {
+  color: #059669 !important;
+}
+
+html.light .bg-emerald-500\/10,
+html.light .bg-emerald-400\/10 {
+  background-color: rgba(5, 150, 105, 0.09) !important;
+}
+
+html.light .bg-emerald-500\/20,
+html.light .bg-emerald-400\/20 {
+  background-color: rgba(5, 150, 105, 0.16) !important;
+}
+
+html.light .border-emerald-500\/20,
+html.light .border-emerald-400\/20 {
+  border-color: rgba(5, 150, 105, 0.25) !important;
+}
+
+/* Primary CTA buttons invert to obsidian with white text in light mode */
+html.light .bg-white.text-neutral-950,
+html.light button.bg-white.text-neutral-950,
+html.light a.bg-white.text-neutral-950 {
+  background-color: #090a0f !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16) !important;
+}
+
+html.light .bg-white.text-neutral-950:hover,
+html.light button.bg-white.text-neutral-950:hover,
+html.light a.bg-white.text-neutral-950:hover {
+  background-color: #1e293b !important;
+  color: #ffffff !important;
+}
+
+html.light .bg-white.text-neutral-950 *,
+html.light button.bg-white.text-neutral-950 *,
+html.light a.bg-white.text-neutral-950 * {
+  color: #ffffff !important;
+}
+
+html.light .bg-white.text-neutral-950 .text-emerald-600,
+html.light .bg-white.text-neutral-950 .text-emerald-500,
+html.light button.bg-white.text-neutral-950 .text-emerald-600,
+html.light a.bg-white.text-neutral-950 .text-emerald-600 {
+  color: #34d399 !important;
+}
+
+html.light .bg-white.text-neutral-950 .text-neutral-700,
+html.light .bg-white.text-neutral-950 .text-neutral-400 {
+  color: #cbd5e1 !important;
+}
+
+/* Grid & dot pattern in light mode */
+html.light .bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px) !important;
+}
+
+html.light .bg-dot-pattern {
+  background-size: 24px 24px;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px) !important;
+}
+
+/* Inputs & Form controls in light mode */
+html.light input,
+html.light textarea {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #090a0f !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+html.light input:focus,
+html.light textarea:focus {
+  border-color: #059669 !important;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12) !important;
+}
+
+/* Shadows in light mode */
+html.light .shadow-2xl.shadow-black\/60,
+html.light .shadow-2xl.shadow-black\/90,
+html.light .shadow-black\/60,
+html.light .shadow-black\/90 {
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Custom cursor in light mode */
+html.light .custom-cursor .bg-white {
+  background-color: #090a0f !important;
+}
+
 /* Hide custom cursor when device doesn't support fine pointer or prefers reduced motion */
 @media (hover: none) and (pointer: coarse) {
   .custom-cursor {

@@ -14,7 +14,7 @@ export default function TechStackSection() {
   return (
     <section id="stack" className="py-24 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
       <SectionHeader
-        number="05"
+        number="06"
         category={dict.stack.eyebrow}
         title={dict.stack.title}
         description={dict.stack.description}

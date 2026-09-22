@@ -4,7 +4,9 @@ import React from "react";
 import { siteConfig } from "@/data/site";
 import { useLanguage } from "@/context/LanguageContext";
 import { ArrowUpRight, Mail, FileText } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/ui/SocialIcons";
+import LiveBelgradeTime from "@/components/ui/LiveBelgradeTime";
+import SoundToggle from "@/components/ui/SoundToggle";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -12,10 +14,13 @@ export default function Footer() {
 
   const navItems = [
     { label: dict.nav.work, href: "#work" },
+    { label: dict.nav.services, href: "#services" },
     { label: dict.nav.expertise, href: "#discipline" },
     { label: dict.nav.stack, href: "#stack" },
     { label: dict.nav.experience, href: "#experience" },
     { label: dict.nav.about, href: "#about" },
+    { label: dict.nav.gear, href: "#gear" },
+    { label: dict.nav.testimonials, href: "#testimonials" },
     { label: dict.nav.faq, href: "#faq" },
     { label: dict.nav.contact, href: "#contact" },
   ];
@@ -37,9 +42,12 @@ export default function Footer() {
             <p className="text-sm text-neutral-500 max-w-sm leading-relaxed">
               {dict.footer.summary}
             </p>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-neutral-400 font-mono">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span>{dict.footer.location}</span>
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-neutral-400 font-mono">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span>{dict.footer.location}</span>
+              </div>
+              <LiveBelgradeTime label="Local Time:" />
             </div>
           </div>
 
@@ -94,6 +102,18 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href={siteConfig.socials.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors flex items-center gap-1.5"
+                >
+                  <InstagramIcon className="w-4 h-4 text-neutral-500" />
+                  <span>Instagram</span>
+                  <ArrowUpRight className="w-3 h-3 text-neutral-600" />
+                </a>
+              </li>
+              <li>
+                <a
                   href={`mailto:${siteConfig.email}`}
                   className="hover:text-white transition-colors flex items-center gap-1.5"
                 >
@@ -118,7 +138,11 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
-          <p>© {currentYear} Luka Đurić. {dict.footer.copyright}</p>
+          <div className="flex items-center gap-3">
+            <p>© {currentYear} Luka Đurić. {dict.footer.copyright}</p>
+            <span className="hidden sm:inline text-neutral-700">•</span>
+            <SoundToggle className="hidden sm:inline-flex" />
+          </div>
           <p className="font-mono text-[11px] text-neutral-600">
             {dict.footer.builtWith}
           </p>

@@ -14,14 +14,18 @@ export const siteConfig = {
   socials: {
     github: "https://github.com/djurke23",
     linkedin: "https://www.linkedin.com/in/djurke23/",
+    instagram: "https://www.instagram.com/djurke23/",
     email: "mailto:lukadjuricdjurke@pm.me",
   },
   navItems: [
     { label: "Work", href: "#work" },
+    { label: "Services", href: "#services" },
     { label: "Expertise", href: "#discipline" },
     { label: "Stack", href: "#stack" },
     { label: "Experience", href: "#experience" },
     { label: "About", href: "#about" },
+    { label: "Gear", href: "#gear" },
+    { label: "Reviews", href: "#testimonials" },
     { label: "FAQ", href: "#faq" },
     { label: "Contact", href: "#contact" },
   ],

@@ -1,13 +1,17 @@
 import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
+import StatsBanner from "@/components/sections/StatsBanner";
 import ValueProposition from "@/components/sections/ValueProposition";
 import FeaturedProjects from "@/components/sections/FeaturedProjects";
 import ProjectMatrix from "@/components/sections/ProjectMatrix";
+import ServicesSection from "@/components/sections/ServicesSection";
 import EngineeringDesign from "@/components/sections/EngineeringDesign";
 import TechStackSection from "@/components/sections/TechStackSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
 import AboutSection from "@/components/sections/AboutSection";
+import GearSection from "@/components/sections/GearSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import FAQSection from "@/components/sections/FAQSection";
 import ContactSection from "@/components/sections/ContactSection";
 import Footer from "@/components/layout/Footer";
@@ -23,31 +27,43 @@ export default function Home() {
         {/* 1. Hero Section */}
         <HeroSection />
 
-        {/* 2. Core Proposition / Manifesto */}
+        {/* 2. Impact Statistics & Track Record */}
+        <StatsBanner />
+
+        {/* 3. Core Proposition / Manifesto */}
         <ValueProposition />
 
-        {/* 3. Flagship Selected Work (Tier 1) */}
+        {/* 4. Flagship Selected Work (Tier 1) */}
         <FeaturedProjects />
 
-        {/* 4. Secondary Project Matrix & Archive */}
+        {/* 5. Secondary Project Matrix & Archive */}
         <ProjectMatrix />
 
-        {/* 5. Engineering + Design + Motion Differentiator */}
+        {/* 6. Bespoke Services & Deliverables */}
+        <ServicesSection />
+
+        {/* 7. Engineering + Design + Motion Differentiator */}
         <EngineeringDesign />
 
-        {/* 6. Technology Matrix */}
+        {/* 8. Technology Matrix */}
         <TechStackSection />
 
-        {/* 7. Work Experience Timeline */}
+        {/* 9. Work Experience Timeline */}
         <ExperienceSection />
 
-        {/* 8. Education & Academic Background */}
+        {/* 10. Education & Academic Background */}
         <AboutSection />
 
-        {/* 9. Frequently Asked Questions */}
+        {/* 11. Studio Setup & Hardware Gear */}
+        <GearSection />
+
+        {/* 12. Client Endorsements & Reviews */}
+        <TestimonialsSection />
+
+        {/* 13. Frequently Asked Questions (Technical & Business) */}
         <FAQSection />
 
-        {/* 10. Contact & Inquiries */}
+        {/* 14. Contact & Inquiries */}
         <ContactSection />
       </main>
 

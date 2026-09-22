@@ -125,7 +125,7 @@ export default function ExperienceSection() {
   return (
     <section id="experience" className="py-24 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
       <SectionHeader
-        number="06"
+        number="07"
         category={dict.experience.eyebrow}
         title={dict.experience.title}
         description={dict.experience.description}

@@ -15,13 +15,21 @@ export default function ProjectMatrix() {
   const { language } = useLanguage();
   const isSr = language === "sr";
 
-  const filters: { label: string; value: ProjectCategory }[] = [
+  const allFilterDefs: { label: string; value: ProjectCategory }[] = [
     { label: isSr ? "Svi Radovi" : "All Works", value: "all" },
     { label: isSr ? "Web Sajtovi" : "Websites", value: "website" },
     { label: isSr ? "UI/UX & Dizajn" : "UI/UX & Design", value: "design" },
     { label: isSr ? "Web Aplikacije" : "Web Apps", value: "web-app" },
     { label: isSr ? "Mobilne Aplikacije" : "Mobile Apps", value: "mobile-app" },
   ];
+
+  const getCount = (val: ProjectCategory) => {
+    if (val === "all") return secondaryProjects.length;
+    return secondaryProjects.filter((p) => p.category === val).length;
+  };
+
+  // Only show categories that have projects
+  const filters = allFilterDefs.filter((f) => getCount(f.value) > 0);
 
   const filtered = secondaryProjects.filter((project) => {
     if (activeFilter === "all") return true;
@@ -45,21 +53,35 @@ export default function ProjectMatrix() {
           </p>
         </div>
 
-        {/* Category Filter Pills */}
+        {/* Category Filter Pills with Item Counts */}
         <div className="flex flex-wrap gap-1.5 p-1 rounded-full bg-neutral-900/60 border border-white/10 self-start">
-          {filters.map((filter) => (
-            <button
-              key={filter.value}
-              onClick={() => setActiveFilter(filter.value)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
-                activeFilter === filter.value
-                  ? "bg-white text-neutral-950 shadow-sm"
-                  : "text-neutral-400 hover:text-white"
-              }`}
-            >
-              {filter.label}
-            </button>
-          ))}
+          {filters.map((filter) => {
+            const count = getCount(filter.value);
+            const isActive = activeFilter === filter.value;
+
+            return (
+              <button
+                key={filter.value}
+                onClick={() => setActiveFilter(filter.value)}
+                className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+                  isActive
+                    ? "bg-white text-neutral-950 shadow-sm"
+                    : "text-neutral-400 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                <span>{filter.label}</span>
+                <span
+                  className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full transition-colors ${
+                    isActive
+                      ? "bg-neutral-900/10 text-neutral-900 font-bold"
+                      : "bg-white/10 text-neutral-400"
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 

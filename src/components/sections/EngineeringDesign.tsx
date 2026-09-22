@@ -18,7 +18,7 @@ export default function EngineeringDesign() {
   return (
     <section id="discipline" className="py-24 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
       <SectionHeader
-        number="04"
+        number="05"
         category={dict.discipline.eyebrow}
         title={dict.discipline.title}
         description={dict.discipline.description}
