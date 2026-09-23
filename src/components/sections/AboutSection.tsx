@@ -66,7 +66,7 @@ export default function AboutSection() {
         <div className="lg:col-span-5 space-y-8">
           <div className="relative group aspect-[4/5] w-full max-w-sm mx-auto lg:mx-0 overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-2xl">
             <Image
-              src="/assets/images/me.jpg"
+              src="/assets/images/me.webp"
               alt="Luka Đurić"
               fill
               className="object-cover object-center grayscale contrast-110 group-hover:grayscale-0 transition-all duration-700 ease-out"

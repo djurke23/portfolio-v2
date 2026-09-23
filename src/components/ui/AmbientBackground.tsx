@@ -12,12 +12,21 @@ export default function AmbientBackground() {
   const smoothY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    // Only track mouse on devices with fine pointer (mouse) and no reduced motion preference
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (!mediaQuery.matches || reducedMotionQuery.matches) {
+      return;
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
+      // Container is fixed inset-0, so use viewport client coordinates directly
       mouseX.set(e.clientX);
-      mouseY.set(e.clientY + window.scrollY);
+      mouseY.set(e.clientY);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
@@ -28,7 +37,7 @@ export default function AmbientBackground() {
 
       {/* Ambient Moving Radial Glow */}
       <motion.div
-        className="absolute w-[600px] h-[600px] rounded-full bg-emerald-500/[0.04] blur-[120px] pointer-events-none"
+        className="absolute w-[600px] h-[600px] rounded-full bg-emerald-500/[0.04] blur-[120px] pointer-events-none will-change-transform"
         style={{
           x: smoothX,
           y: smoothY,

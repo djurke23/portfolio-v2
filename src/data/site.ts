@@ -5,7 +5,7 @@ export const siteConfig = {
   tagline: "I architect and build modern web applications and digital products from idea to production — combining robust engineering with refined UI/UX design.",
   description: "Personal portfolio and engineering case studies of Luka Đurić, a Full-Stack Developer specializing in Next.js, TypeScript, React Native, Go, and high-performance user interfaces.",
   url: "https://lukadjuric.dev",
-  ogImage: "/assets/images/portfolio-v1.png",
+  ogImage: "/assets/images/portfolio-v1.webp",
   location: "Belgrade, Serbia",
   email: "lukadjuricdjurke@pm.me",
   phone: "+381677411001",

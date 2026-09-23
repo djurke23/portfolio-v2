@@ -2,27 +2,29 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/data/site";
+import dynamic from "next/dynamic";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ToastProvider } from "@/context/ToastContext";
 import { SoundProvider } from "@/context/SoundContext";
-import CustomCursor from "@/components/layout/CustomCursor";
 import AmbientBackground from "@/components/ui/AmbientBackground";
-import BackToTop from "@/components/ui/BackToTop";
-import CommandPalette from "@/components/ui/CommandPalette";
 import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
+
+import ClientEnhancements from "@/components/layout/ClientEnhancements";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   display: "swap",
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -55,7 +57,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: "/assets/images/portfolio-v1.png",
+        url: "/assets/images/portfolio-v1.webp",
         width: 1200,
         height: 630,
         alt: "Luka Đurić — Full-Stack Developer Portfolio",
@@ -66,7 +68,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: ["/assets/images/portfolio-v1.png"],
+    images: ["/assets/images/portfolio-v1.webp"],
   },
   robots: {
     index: true,
@@ -88,7 +90,7 @@ const jsonLd = {
       name: "Luka Đurić",
       jobTitle: "Full-Stack Developer & Product Craftsman",
       url: "https://lukadjuric.dev",
-      image: "https://lukadjuric.dev/assets/images/portfolio-v1.png",
+      image: "https://lukadjuric.dev/assets/images/portfolio-v1.webp",
       email: "mailto:lukadjuricdjurke@pm.me",
       address: {
         "@type": "PostalAddress",
@@ -178,10 +180,8 @@ export default function RootLayout({
                 <SmoothScrollProvider>
                   <ScrollProgressBar />
                   <AmbientBackground />
-                  <CustomCursor />
                   {children}
-                  <BackToTop />
-                  <CommandPalette />
+                  <ClientEnhancements />
                 </SmoothScrollProvider>
               </ToastProvider>
             </SoundProvider>
