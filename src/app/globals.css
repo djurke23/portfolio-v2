@@ -369,6 +369,10 @@ html.light .custom-cursor .bg-white {
   background-color: #090a0f !important;
 }
 
+html.light .custom-cursor span {
+  color: #090a0f !important;
+}
+
 /* Hide custom cursor when device doesn't support fine pointer or prefers reduced motion */
 @media (hover: none) and (pointer: coarse) {
   .custom-cursor {

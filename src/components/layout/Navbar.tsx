@@ -161,7 +161,7 @@ export default function Navbar() {
           </a>
           <a
             href={siteConfig.cvPath}
-            download
+            download="Luka_Djuric_CV.pdf"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium rounded-full bg-white/5 hover:bg-white/10 text-neutral-200 hover:text-white border border-white/10 transition-all hover:scale-105 active:scale-95"
             data-cursor="CV"
           >
@@ -293,7 +293,7 @@ export default function Navbar() {
               >
                 <a
                   href={siteConfig.cvPath}
-                  download
+                  download="Luka_Djuric_CV.pdf"
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white text-neutral-950 font-semibold text-sm hover:bg-neutral-200 transition-colors shadow-lg active:scale-98"
                 >

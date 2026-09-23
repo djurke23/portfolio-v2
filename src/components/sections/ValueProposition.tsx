@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useTheme } from "@/context/ThemeContext";
 import TextReveal from "@/components/ui/TextReveal";
 import { Code2, Smartphone, Palette, Zap } from "lucide-react";
 
@@ -9,6 +10,8 @@ export default function ValueProposition() {
   const { dict } = useLanguage();
 
   const capabilityIcons = [Code2, Smartphone, Palette, Zap];
+
+  const { theme } = useTheme();
 
   return (
     <section className="py-24 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
@@ -21,7 +24,7 @@ export default function ValueProposition() {
 
         {/* Scroll Reveal Manifesto */}
         <div className="max-w-5xl">
-          <TextReveal key={dict.manifesto.text} text={dict.manifesto.text} />
+          <TextReveal key={`${dict.manifesto.text}-${theme}`} text={dict.manifesto.text} />
         </div>
 
         {/* Capability Pillars Grid */}

@@ -107,7 +107,8 @@ export default function AboutSection() {
           <div className="pt-2">
             <a
               href={siteConfig.cvPath}
-              download
+              download="Luka_Djuric_CV.pdf"
+              data-cursor="CV"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 text-white border border-white/15 text-sm font-medium transition-all group"
             >
               <FileText className="w-4 h-4 text-emerald-400" />

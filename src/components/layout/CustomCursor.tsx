@@ -73,6 +73,8 @@ export default function CustomCursor() {
 
   if (!isVisible) return null;
 
+  const pillWidth = cursorText ? Math.max(76, cursorText.length * 8.5 + 24) : isHovered ? 44 : 28;
+
   return (
     <div className="custom-cursor fixed inset-0 pointer-events-none z-50 overflow-hidden">
       {/* Outer subtle follower / pill */}
@@ -85,35 +87,43 @@ export default function CustomCursor() {
           translateY: "-50%",
         }}
         animate={{
-          width: cursorText ? 72 : isHovered ? 44 : 28,
+          width: pillWidth,
           height: cursorText ? 34 : isHovered ? 44 : 28,
           backgroundColor: cursorText
             ? isLight
-              ? "rgba(9, 10, 15, 0.95)"
+              ? "rgba(255, 255, 255, 0.98)"
               : "rgba(255, 255, 255, 0.95)"
             : isHovered
-            ? "rgba(16, 185, 129, 0.18)"
+            ? isLight
+              ? "rgba(16, 185, 129, 0.14)"
+              : "rgba(16, 185, 129, 0.18)"
             : isLight
             ? "rgba(0, 0, 0, 0.04)"
             : "rgba(255, 255, 255, 0.04)",
           borderColor: cursorText
             ? isLight
-              ? "rgba(9, 10, 15, 1)"
+              ? "rgba(0, 0, 0, 0.14)"
               : "rgba(255, 255, 255, 1)"
             : isHovered
-            ? "rgba(16, 185, 129, 0.5)"
+            ? isLight
+              ? "rgba(16, 185, 129, 0.6)"
+              : "rgba(16, 185, 129, 0.5)"
             : isLight
             ? "rgba(0, 0, 0, 0.22)"
             : "rgba(255, 255, 255, 0.25)",
-          borderWidth: cursorText ? 0 : 1,
+          borderWidth: cursorText ? (isLight ? 1 : 0) : 1,
+          boxShadow: cursorText
+            ? isLight
+              ? "0 4px 16px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.06)"
+              : "0 4px 20px rgba(0, 0, 0, 0.4)"
+            : "none",
         }}
         transition={{ type: "spring", damping: 25, stiffness: 350 }}
       >
         {cursorText && (
           <span
-            className={`text-[10px] font-mono tracking-widest font-semibold uppercase ${
-              isLight ? "text-white" : "text-neutral-950"
-            }`}
+            style={{ color: "#090a0f" }}
+            className="text-[10px] font-mono tracking-widest font-bold uppercase select-none text-neutral-950 px-2"
           >
             {cursorText}
           </span>

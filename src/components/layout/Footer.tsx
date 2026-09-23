@@ -124,7 +124,8 @@ export default function Footer() {
               <li>
                 <a
                   href={siteConfig.cvPath}
-                  download
+                  download="Luka_Djuric_CV.pdf"
+                  data-cursor="CV"
                   className="hover:text-emerald-400 transition-colors flex items-center gap-1.5 font-medium text-white pt-1"
                 >
                   <FileText className="w-4 h-4 text-emerald-400" />

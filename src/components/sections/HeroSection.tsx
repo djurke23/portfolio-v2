@@ -141,7 +141,7 @@ export default function HeroSection() {
 
           <a
             href={siteConfig.cvPath}
-            download
+            download="Luka_Djuric_CV.pdf"
             className="inline-flex items-center gap-2 px-4 py-3.5 rounded-full text-neutral-400 hover:text-white text-sm font-mono transition-colors group"
             data-cursor="CV"
           >

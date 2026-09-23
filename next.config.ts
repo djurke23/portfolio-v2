@@ -12,15 +12,6 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
   },
-  async redirects() {
-    return [
-      {
-        source: "/cv/cv.pdf",
-        destination: "/cv/CV.pdf",
-        permanent: true,
-      },
-    ];
-  },
 };
 
 export default nextConfig;
