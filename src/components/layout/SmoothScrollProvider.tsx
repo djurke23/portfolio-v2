@@ -14,7 +14,15 @@ export default function SmoothScrollProvider({
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    if (prefersReducedMotion) {
+    // Mobile/touch devices already feature native hardware-accelerated 120Hz smooth momentum scrolling.
+    // Overriding touch scroll with Lenis intercepts touch events and causes frame drops and stuttering.
+    const isTouchDevice =
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.matchMedia("(hover: none)").matches ||
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0;
+
+    if (prefersReducedMotion || isTouchDevice) {
       return;
     }
 

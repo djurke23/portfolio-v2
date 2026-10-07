@@ -66,8 +66,8 @@ export default function ServicesSection() {
               transition={{ duration: 0.5, delay: index * 0.08 }}
               className="glass-card p-6 sm:p-7 rounded-2xl border border-white/10 hover:border-emerald-500/30 flex flex-col justify-between group transition-all duration-300 relative overflow-hidden"
             >
-              {/* Subtle accent glow on hover */}
-              <div className="absolute -top-16 -right-16 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/20 transition-all pointer-events-none" />
+              {/* Subtle accent glow on hover (desktop only) */}
+              <div className="hidden sm:block absolute -top-16 -right-16 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/20 transition-all pointer-events-none" />
 
               <div className="space-y-4 relative z-10">
                 <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 group-hover:border-emerald-500/40 group-hover:bg-emerald-500/10 transition-all">

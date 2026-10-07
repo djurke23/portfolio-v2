@@ -33,9 +33,9 @@ export default function EngineeringDesign() {
               key={pillar.id}
               className="relative glass-card p-8 rounded-2xl border border-white/10 overflow-hidden flex flex-col justify-between group transition-all duration-300 hover:border-white/20"
             >
-              {/* Subtle Ambient Gradient Corner */}
+              {/* Subtle Ambient Gradient Corner (desktop only) */}
               <div
-                className={`absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl ${meta.accent} blur-2xl pointer-events-none opacity-40 group-hover:opacity-80 transition-opacity`}
+                className={`hidden sm:block absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl ${meta.accent} blur-2xl pointer-events-none opacity-40 group-hover:opacity-80 transition-opacity`}
               />
 
               <div className="space-y-5 relative z-10">

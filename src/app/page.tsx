@@ -1,20 +1,23 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/layout/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
 import StatsBanner from "@/components/sections/StatsBanner";
-import ValueProposition from "@/components/sections/ValueProposition";
-import FeaturedProjects from "@/components/sections/FeaturedProjects";
-import ProjectMatrix from "@/components/sections/ProjectMatrix";
-import ServicesSection from "@/components/sections/ServicesSection";
-import EngineeringDesign from "@/components/sections/EngineeringDesign";
-import TechStackSection from "@/components/sections/TechStackSection";
-import ExperienceSection from "@/components/sections/ExperienceSection";
-import AboutSection from "@/components/sections/AboutSection";
-import GearSection from "@/components/sections/GearSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import FAQSection from "@/components/sections/FAQSection";
-import ContactSection from "@/components/sections/ContactSection";
 import Footer from "@/components/layout/Footer";
+
+// Dynamically split below-the-fold sections into separate chunks
+const ValueProposition = dynamic(() => import("@/components/sections/ValueProposition"));
+const FeaturedProjects = dynamic(() => import("@/components/sections/FeaturedProjects"));
+const ProjectMatrix = dynamic(() => import("@/components/sections/ProjectMatrix"));
+const ServicesSection = dynamic(() => import("@/components/sections/ServicesSection"));
+const EngineeringDesign = dynamic(() => import("@/components/sections/EngineeringDesign"));
+const TechStackSection = dynamic(() => import("@/components/sections/TechStackSection"));
+const ExperienceSection = dynamic(() => import("@/components/sections/ExperienceSection"));
+const AboutSection = dynamic(() => import("@/components/sections/AboutSection"));
+const GearSection = dynamic(() => import("@/components/sections/GearSection"));
+const TestimonialsSection = dynamic(() => import("@/components/sections/TestimonialsSection"));
+const FAQSection = dynamic(() => import("@/components/sections/FAQSection"));
+const ContactSection = dynamic(() => import("@/components/sections/ContactSection"));
 
 export default function Home() {
   return (

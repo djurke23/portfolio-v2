@@ -75,8 +75,8 @@ export default function GearSection() {
               transition={{ duration: 0.5, delay: index * 0.05 }}
               className={`${item.colSpan} glass-card p-6 sm:p-7 rounded-3xl border border-white/10 hover:border-emerald-500/40 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between min-h-[220px] relative overflow-hidden group`}
             >
-              {/* Subtle hover glow accent */}
-              <div className="absolute -top-16 -right-16 w-36 h-36 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/25 transition-all" />
+              {/* Subtle hover glow accent (desktop only) */}
+              <div className="hidden sm:block absolute -top-16 -right-16 w-36 h-36 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/25 transition-all" />
 
               {/* Top Bar: Icon + Category Badge */}
               <div className="flex items-start justify-between gap-3 relative z-10">

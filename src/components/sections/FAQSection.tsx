@@ -102,7 +102,8 @@ export default function FAQSection() {
         {/* Side Prompt / Still Have Questions Card */}
         <div className="lg:col-span-4 sticky top-28">
           <div className="glass-card p-6 sm:p-7 rounded-3xl border border-white/10 space-y-6 shadow-2xl relative overflow-hidden group">
-            <div className="absolute -top-16 -right-16 w-36 h-36 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+            {/* Subtle glow (desktop only) */}
+            <div className="hidden sm:block absolute -top-16 -right-16 w-36 h-36 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
             <div className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400">
               <MessageSquare className="w-5 h-5" />

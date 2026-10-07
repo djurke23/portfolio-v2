@@ -72,8 +72,8 @@ export default function StatsBanner() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="glass-card p-5 sm:p-7 rounded-2xl border border-white/10 hover:border-emerald-500/30 transition-all duration-300 relative group overflow-hidden"
             >
-              {/* Subtle hover glow */}
-              <div className="absolute -top-12 -right-12 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all pointer-events-none" />
+              {/* Subtle hover glow (desktop only) */}
+              <div className="hidden sm:block absolute -top-12 -right-12 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all pointer-events-none" />
 
               <div className="space-y-2 relative z-10">
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />

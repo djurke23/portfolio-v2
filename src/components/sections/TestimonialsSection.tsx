@@ -57,8 +57,8 @@ export default function TestimonialsSection() {
               transition={{ duration: 0.5, delay: index * 0.08 }}
               className="glass-card p-6 sm:p-7 rounded-2xl border border-white/10 hover:border-emerald-500/30 flex flex-col justify-between transition-all duration-300 relative group overflow-hidden"
             >
-              {/* Subtle card glow */}
-              <div className="absolute -top-16 -right-16 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/20 transition-all" />
+              {/* Subtle card glow (desktop only) */}
+              <div className="hidden sm:block absolute -top-16 -right-16 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/20 transition-all" />
 
               <div className="space-y-4 relative z-10">
                 {/* Header: Project Badge & Quote Icon */}

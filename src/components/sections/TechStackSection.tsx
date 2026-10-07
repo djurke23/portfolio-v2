@@ -66,6 +66,7 @@ export default function TechStackSection() {
                           alt={skill.name}
                           width={14}
                           height={14}
+                          unoptimized
                           className="object-contain"
                         />
                       </div>
