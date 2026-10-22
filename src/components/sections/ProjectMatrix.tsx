@@ -37,11 +37,12 @@ export default function ProjectMatrix() {
   });
 
   return (
-    <section className="py-20 sm:py-28 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
+    <section id="archive" className="py-20 sm:py-28 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
         <div className="space-y-3 max-w-xl">
-          <div className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-semibold">
-            {isSr ? "[03] Arhiva Projekata" : "[03] Project Archive"}
+          <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-emerald-400 font-semibold">
+            <span className="text-neutral-500 font-normal">[03]</span>
+            <span>{isSr ? "Arhiva Projekata" : "Project Archive"}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
             {isSr ? "Klijentske Implementacije i Dizajn Koncepti" : "Client Implementations & Design Concepts"}
@@ -177,6 +178,11 @@ export default function ProjectMatrix() {
                       >
                         <ExternalLink className="w-4 h-4" />
                       </a>
+                    )}
+                    {!project.githubUrl && !project.figmaUrl && !project.liveUrl && (
+                      <span className="text-[10px] font-mono text-neutral-400 px-2 py-0.5 rounded bg-white/5 border border-white/10">
+                        {isSr ? "Koncept" : "Concept"}
+                      </span>
                     )}
                   </div>
                 </div>

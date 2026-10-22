@@ -15,6 +15,7 @@ export default function LiveBelgradeTime({
   label,
 }: LiveBelgradeTimeProps) {
   const [timeString, setTimeString] = useState<string>("");
+  const [tzCode, setTzCode] = useState<string>("CET");
 
   useEffect(() => {
     const updateTime = () => {
@@ -28,6 +29,16 @@ export default function LiveBelgradeTime({
           hour12: false,
         }).format(now);
         setTimeString(formatted);
+
+        // Dynamically detect CET / CEST
+        const tzPart = new Intl.DateTimeFormat("en-US", {
+          timeZone: "Europe/Belgrade",
+          timeZoneName: "short",
+        }).formatToParts(now).find((p) => p.type === "timeZoneName")?.value;
+
+        if (tzPart) {
+          setTzCode(tzPart);
+        }
       } catch {
         const d = new Date();
         setTimeString(d.toTimeString().slice(0, 8));
@@ -53,11 +64,11 @@ export default function LiveBelgradeTime({
 
       {label && <span className="text-neutral-400">{label}</span>}
 
-      <span className="font-semibold text-white tracking-wider">
+      <span className="font-semibold text-white tracking-wider tabular-nums min-w-[62px] inline-block">
         {timeString || "--:--:--"}
       </span>
       <span className="text-[10px] text-emerald-400/80 font-bold uppercase tracking-wider">
-        CET
+        {tzCode}
       </span>
     </div>
   );

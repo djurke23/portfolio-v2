@@ -8,16 +8,18 @@ import { useToast } from "@/context/ToastContext";
 import { useSound } from "@/context/SoundContext";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { ArrowDown, ArrowUpRight, MapPin, FileText, Copy, Check } from "lucide-react";
+import { trackEmailCopy, trackCvDownload } from "@/lib/analytics";
 
 export default function HeroSection() {
   const { dict, language } = useLanguage();
   const { copyEmail } = useToast();
-  const { playSuccess, playClick } = useSound();
+  const { playSuccess } = useSound();
   const [copied, setCopied] = useState(false);
   const isSr = language === "sr";
 
   const handleCopyEmail = () => {
     playSuccess();
+    trackEmailCopy("hero");
     copyEmail(
       siteConfig.email,
       isSr ? "Email kopiran u clipboard!" : "Email copied to clipboard!"
@@ -142,6 +144,7 @@ export default function HeroSection() {
           <a
             href={siteConfig.cvPath}
             download="Luka_Djuric_CV.pdf"
+            onClick={() => trackCvDownload("hero")}
             className="inline-flex items-center gap-2 px-4 py-3.5 rounded-full text-neutral-400 hover:text-white text-sm font-mono transition-colors group"
             data-cursor="CV"
           >

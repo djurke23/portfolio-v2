@@ -9,9 +9,10 @@ import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import SoundToggle from "@/components/ui/SoundToggle";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { useSound } from "@/context/SoundContext";
-import { FileText, ArrowUpRight } from "lucide-react";
+import { FileText, ArrowUpRight, Search } from "lucide-react";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/ui/SocialIcons";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackCvDownload, trackSearchOpen } from "@/lib/analytics";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -21,17 +22,26 @@ export default function Navbar() {
   const { dict } = useLanguage();
   const { playClick, playToggle } = useSound();
 
-  const navItems = [
-    { label: dict.nav.work, href: "#work" },
-    { label: dict.nav.services, href: "#services" },
-    { label: dict.nav.expertise, href: "#discipline" },
-    { label: dict.nav.stack, href: "#stack" },
-    { label: dict.nav.experience, href: "#experience" },
-    { label: dict.nav.about, href: "#about" },
-    { label: dict.nav.gear, href: "#gear" },
-    { label: dict.nav.testimonials, href: "#testimonials" },
-    { label: dict.nav.contact, href: "#contact" },
+  const navItems: { label: string; href: string; tier: "primary" | "secondary" }[] = [
+    { label: dict.nav.work, href: "#work", tier: "primary" },
+    { label: dict.nav.services, href: "#services", tier: "primary" },
+    { label: dict.nav.expertise, href: "#discipline", tier: "secondary" },
+    { label: dict.nav.stack, href: "#stack", tier: "primary" },
+    { label: dict.nav.experience, href: "#experience", tier: "primary" },
+    { label: dict.nav.about, href: "#about", tier: "primary" },
+    { label: dict.nav.gear, href: "#gear", tier: "secondary" },
+    { label: dict.nav.testimonials, href: "#testimonials", tier: "secondary" },
+    { label: dict.nav.faq, href: "#faq", tier: "secondary" },
+    { label: dict.nav.contact, href: "#contact", tier: "primary" },
   ];
+
+  const handleOpenSearch = () => {
+    playClick();
+    trackSearchOpen("navbar");
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("open-command-palette"));
+    }
+  };
 
   const resolveHref = (href: string) => {
     if (isHome) return href;
@@ -89,7 +99,7 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-40 flex justify-center px-4 sm:px-6 pt-4 sm:pt-6 pointer-events-none">
       <nav
         aria-label="Main Navigation"
-        className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl transition-all duration-300 rounded-full px-4 sm:px-5 py-3 ${
+        className={`pointer-events-auto flex items-center justify-between w-full max-w-7xl transition-all duration-300 rounded-full px-4 sm:px-6 py-3 ${
           scrolled
             ? "glass-nav shadow-2xl shadow-black/60 py-2.5"
             : "bg-neutral-950/40 backdrop-blur-md border border-white/5 py-3.5"
@@ -117,7 +127,9 @@ export default function Navbar() {
               key={item.href}
               href={resolveHref(item.href)}
               onClick={(e) => handleNavClick(e, item.href)}
-              className="px-2.5 py-1.5 rounded-full hover:text-white hover:bg-white/5 transition-all"
+              className={`px-2.5 py-1.5 rounded-full hover:text-white hover:bg-white/5 transition-all ${
+                item.tier === "secondary" ? "hidden xl:inline-block" : "inline-block"
+              }`}
             >
               {item.label}
             </a>
@@ -126,43 +138,24 @@ export default function Navbar() {
 
         {/* Desktop Actions */}
         <div className="hidden sm:flex items-center gap-1.5 sm:gap-2">
+          <button
+            type="button"
+            onClick={handleOpenSearch}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-neutral-400 hover:text-white hover:bg-white/5 border border-white/5 hover:border-white/10 transition-all text-xs font-mono"
+            title={dict.nav.search || "Search (⌘K)"}
+            aria-label="Search"
+          >
+            <Search className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="hidden xl:inline text-[11px] text-neutral-500 font-semibold">⌘K</span>
+          </button>
           <ThemeToggle />
           <SoundToggle />
           <LanguageSwitcher variant="desktop" />
           <a
-            href={siteConfig.socials.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub Profile"
-            className="p-2 rounded-full text-neutral-400 hover:text-white hover:bg-white/5 transition-colors"
-            data-cursor="GITHUB"
-          >
-            <GithubIcon className="w-4 h-4" />
-          </a>
-          <a
-            href={siteConfig.socials.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn Profile"
-            className="p-2 rounded-full text-neutral-400 hover:text-white hover:bg-white/5 transition-colors"
-            data-cursor="LINKEDIN"
-          >
-            <LinkedinIcon className="w-4 h-4" />
-          </a>
-          <a
-            href={siteConfig.socials.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram Profile"
-            className="p-2 rounded-full text-neutral-400 hover:text-white hover:bg-white/5 transition-colors"
-            data-cursor="INSTAGRAM"
-          >
-            <InstagramIcon className="w-4 h-4" />
-          </a>
-          <a
             href={siteConfig.cvPath}
             download="Luka_Djuric_CV.pdf"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium rounded-full bg-white/5 hover:bg-white/10 text-neutral-200 hover:text-white border border-white/10 transition-all hover:scale-105 active:scale-95"
+            onClick={() => trackCvDownload("navbar_desktop")}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium rounded-full bg-white/5 hover:bg-white/10 text-neutral-200 hover:text-white border border-white/10 transition-all hover:scale-105 active:scale-95 ml-1"
             data-cursor="CV"
           >
             <FileText className="w-3.5 h-3.5 text-emerald-400" />
@@ -266,6 +259,22 @@ export default function Navbar() {
                 </div>
               </div>
 
+              {/* Quick Search Trigger in Mobile Drawer */}
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  handleOpenSearch();
+                }}
+                className="mt-3 w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-emerald-500/30 text-neutral-300 hover:text-white transition-all text-xs font-mono"
+              >
+                <div className="flex items-center gap-2">
+                  <Search className="w-4 h-4 text-emerald-400" />
+                  <span>{dict.nav.search || "Search"}</span>
+                </div>
+                <span className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] text-neutral-400 font-mono">⌘K</span>
+              </button>
+
               {/* Staggered Navigation links */}
               <div className="flex flex-col gap-1.5 py-5">
                 {navItems.map((item, index) => (
@@ -294,7 +303,10 @@ export default function Navbar() {
                 <a
                   href={siteConfig.cvPath}
                   download="Luka_Djuric_CV.pdf"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    trackCvDownload("navbar_mobile");
+                    setMobileMenuOpen(false);
+                  }}
                   className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white text-neutral-950 font-semibold text-sm hover:bg-neutral-200 transition-colors shadow-lg active:scale-98"
                 >
                   <FileText className="w-4 h-4 text-emerald-600" />

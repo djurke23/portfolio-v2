@@ -1,16 +1,36 @@
 "use client";
 
 import React from "react";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/site";
 import { useLanguage } from "@/context/LanguageContext";
-import { ArrowUpRight, Mail, FileText } from "lucide-react";
+import { ArrowUpRight, ArrowUp, Mail, FileText } from "lucide-react";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/ui/SocialIcons";
 import LiveBelgradeTime from "@/components/ui/LiveBelgradeTime";
 import SoundToggle from "@/components/ui/SoundToggle";
+import { trackCvDownload } from "@/lib/analytics";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const { dict } = useLanguage();
+  const { dict, language } = useLanguage();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const isSr = language === "sr";
+
+  const scrollToTop = () => {
+    if (typeof window !== "undefined") {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
+
+  const resolveHref = (href: string) => {
+    if (isHome) return href;
+    return `/${href}`;
+  };
 
   const navItems = [
     { label: dict.nav.work, href: "#work" },
@@ -60,7 +80,7 @@ export default function Footer() {
               {navItems.map((item) => (
                 <li key={item.href}>
                   <a
-                    href={item.href}
+                    href={resolveHref(item.href)}
                     className="hover:text-white transition-colors flex items-center gap-1 group"
                   >
                     <span>{item.label}</span>
@@ -125,6 +145,7 @@ export default function Footer() {
                 <a
                   href={siteConfig.cvPath}
                   download="Luka_Djuric_CV.pdf"
+                  onClick={() => trackCvDownload("footer")}
                   data-cursor="CV"
                   className="hover:text-emerald-400 transition-colors flex items-center gap-1.5 font-medium text-white pt-1"
                 >
@@ -144,9 +165,21 @@ export default function Footer() {
             <span className="hidden sm:inline text-neutral-700">•</span>
             <SoundToggle className="hidden sm:inline-flex" />
           </div>
-          <p className="font-mono text-[11px] text-neutral-600">
-            {dict.footer.builtWith}
-          </p>
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={scrollToTop}
+              className="inline-flex items-center gap-1.5 font-mono text-[11px] text-neutral-400 hover:text-emerald-400 transition-colors group cursor-pointer"
+              aria-label={isSr ? "Povratak na vrh" : "Back to top"}
+            >
+              <span>{isSr ? "Povratak na vrh" : "Back to top"}</span>
+              <ArrowUp className="w-3.5 h-3.5 text-neutral-500 group-hover:text-emerald-400 group-hover:-translate-y-0.5 transition-all" />
+            </button>
+            <span className="hidden sm:inline text-neutral-700">•</span>
+            <p className="font-mono text-[11px] text-neutral-600">
+              {dict.footer.builtWith}
+            </p>
+          </div>
         </div>
       </div>
     </footer>

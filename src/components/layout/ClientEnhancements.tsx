@@ -8,11 +8,6 @@ const CustomCursor = dynamic(
   { ssr: false }
 );
 
-const BackToTop = dynamic(
-  () => import("@/components/ui/BackToTop"),
-  { ssr: false }
-);
-
 const CommandPalette = dynamic(
   () => import("@/components/ui/CommandPalette"),
   { ssr: false }
@@ -42,8 +37,8 @@ export default function ClientEnhancements() {
   return (
     <>
       {isPointerFine && <CustomCursor />}
-      <BackToTop />
-      {isPointerFine && <CommandPalette />}
+      <CommandPalette />
     </>
   );
 }
+

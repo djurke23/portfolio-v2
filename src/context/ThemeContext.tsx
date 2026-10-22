@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
+import React, { createContext, useContext, useCallback, useSyncExternalStore } from "react";
 
 export type Theme = "dark" | "light";
 
@@ -12,54 +12,72 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
-  const [mounted, setMounted] = useState(false);
+const THEME_STORAGE_KEY = "portfolio_theme";
 
-  // Initialize theme from localStorage or default to dark
-  useEffect(() => {
-    try {
-      const savedTheme = localStorage.getItem("portfolio_theme") as Theme | null;
-      if (savedTheme === "light" || savedTheme === "dark") {
-        setThemeState(savedTheme);
-        applyTheme(savedTheme);
-      } else {
-        // Default to dark mode for authentic brand identity
-        setThemeState("dark");
-        applyTheme("dark");
-      }
-    } catch {
-      applyTheme("dark");
+function applyThemeToDOM(newTheme: Theme) {
+  if (typeof document === "undefined") return;
+  const root = document.documentElement;
+  if (newTheme === "light") {
+    root.classList.remove("dark");
+    root.classList.add("light");
+    root.style.colorScheme = "light";
+  } else {
+    root.classList.remove("light");
+    root.classList.add("dark");
+    root.style.colorScheme = "dark";
+  }
+}
+
+function getThemeSnapshot(): Theme {
+  try {
+    const saved = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
+    if (saved === "light" || saved === "dark") {
+      return saved;
     }
-    setMounted(true);
-  }, []);
+  } catch {
+    // Ignore storage errors
+  }
+  return "dark";
+}
 
-  const applyTheme = (newTheme: Theme) => {
-    const root = document.documentElement;
-    if (newTheme === "light") {
-      root.classList.remove("dark");
-      root.classList.add("light");
-      root.style.colorScheme = "light";
-    } else {
-      root.classList.remove("light");
-      root.classList.add("dark");
-      root.style.colorScheme = "dark";
+function getThemeServerSnapshot(): Theme {
+  return "dark";
+}
+
+function subscribeTheme(callback: () => void) {
+  const handleStorage = (e: StorageEvent) => {
+    if (e.key === THEME_STORAGE_KEY) {
+      callback();
     }
   };
 
+  window.addEventListener("storage", handleStorage);
+  window.addEventListener("local-theme-change", callback);
+
+  return () => {
+    window.removeEventListener("storage", handleStorage);
+    window.removeEventListener("local-theme-change", callback);
+  };
+}
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const theme = useSyncExternalStore(subscribeTheme, getThemeSnapshot, getThemeServerSnapshot);
+
   const setTheme = useCallback((newTheme: Theme) => {
-    setThemeState(newTheme);
-    applyTheme(newTheme);
+    applyThemeToDOM(newTheme);
     try {
-      localStorage.setItem("portfolio_theme", newTheme);
+      localStorage.setItem(THEME_STORAGE_KEY, newTheme);
+      window.dispatchEvent(new Event("local-theme-change"));
     } catch {
       // Ignore storage errors
     }
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  }, [theme, setTheme]);
+    const current = getThemeSnapshot();
+    const nextTheme: Theme = current === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+  }, [setTheme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>

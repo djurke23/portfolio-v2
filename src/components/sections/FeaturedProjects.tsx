@@ -20,9 +20,9 @@ const srProjectTexts: Record<string, { tagline: string; description: string; cat
     categoryLabel: "E-Commerce & Brand Platforma",
   },
   "rev-and-chill": {
-    tagline: "Zajednica entuzijasta automobilske kulture i digitalni medij.",
-    description: "Interaktivna web platforma za ljubitelje automobilske kulture, manifestacije i multimedijalni sadržaj.",
-    categoryLabel: "Web Platforma & Zajednica",
+    tagline: "Full-stack sistem za prijavu i moderaciju vozila za automobilske skupove.",
+    description: "Serverless web aplikacija (Next.js, Cloudflare D1/R2) za automatizovanu prijavu, kuraciju učesnika i javni showcase modifikovanih vozila.",
+    categoryLabel: "Full-Stack Web Aplikacija",
   },
 };
 

@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { useToast } from "@/context/ToastContext";
 import { useSound } from "@/context/SoundContext";
@@ -10,7 +11,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
 import {
   Search,
-  Command,
   FileText,
   Mail,
   Languages,
@@ -35,62 +35,89 @@ interface PaletteItem {
 }
 
 export default function CommandPalette() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
-  const { dict, language, setLanguage } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const { copyEmail, showToast } = useToast();
   const { playClick, playOpen, playToggle, playSuccess } = useSound();
   const isSr = language === "sr";
+
+  const openPalette = useCallback(() => {
+    playOpen();
+    setQuery("");
+    setSelectedIndex(0);
+    setOpen(true);
+  }, [playOpen]);
+
+  const closePalette = useCallback(() => {
+    playToggle();
+    setOpen(false);
+  }, [playToggle]);
 
   // Toggle Command Palette on Cmd+K / Ctrl+K
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        setOpen((prev) => {
-          if (!prev) playOpen();
-          else playToggle();
-          return !prev;
-        });
+        if (open) {
+          closePalette();
+        } else {
+          openPalette();
+        }
       } else if (e.key === "Escape" && open) {
-        e.preventDefault();
-        playToggle();
-        setOpen(false);
+        closePalette();
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [open, playOpen, playToggle]);
+  }, [open, openPalette, closePalette]);
+
+  // Listen for programmatic open requests from Navbar & mobile menu
+  useEffect(() => {
+    const handleOpenEvent = () => {
+      openPalette();
+    };
+
+    window.addEventListener("open-command-palette", handleOpenEvent);
+    return () => window.removeEventListener("open-command-palette", handleOpenEvent);
+  }, [openPalette]);
 
   // Focus input when opened
   useEffect(() => {
     if (open) {
-      setQuery("");
-      setSelectedIndex(0);
       setTimeout(() => inputRef.current?.focus(), 50);
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
-  const scrollToAnchor = (anchor: string) => {
-    setOpen(false);
-    const el = document.querySelector(anchor);
-    if (el) {
-      if (window.__lenis) {
-        window.__lenis.scrollTo(el as HTMLElement);
+  const scrollToAnchor = useCallback(
+    (anchor: string) => {
+      setOpen(false);
+      const el = document.querySelector(anchor);
+      if (el) {
+        if (window.__lenis) {
+          window.__lenis.scrollTo(el as HTMLElement);
+        } else {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
       } else {
-        el.scrollIntoView({ behavior: "smooth" });
+        router.push(`/${anchor}`);
       }
-    }
-  };
+    },
+    [router]
+  );
 
   const allItems: PaletteItem[] = useMemo(() => {
     const items: PaletteItem[] = [
@@ -259,7 +286,7 @@ export default function CommandPalette() {
     });
 
     return items;
-  }, [isSr, language, copyEmail, setLanguage, showToast]);
+  }, [isSr, language, copyEmail, setLanguage, showToast, playSuccess, playToggle, theme, toggleTheme, scrollToAnchor]);
 
   const filteredItems = useMemo(() => {
     if (!query.trim()) return allItems;
@@ -289,28 +316,9 @@ export default function CommandPalette() {
   };
 
   return (
-    <>
-      {/* Floating Trigger Pill in bottom left */}
-      <button
-        type="button"
-        onClick={() => {
-          playOpen();
-          setOpen(true);
-        }}
-        className="fixed bottom-6 left-6 z-40 hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-full glass-card border border-white/10 hover:border-emerald-500/40 text-neutral-400 hover:text-white transition-all shadow-xl hover:scale-105 active:scale-95 group text-xs font-mono"
-        title="Open Command Palette (⌘K)"
-      >
-        <Command className="w-3.5 h-3.5 text-emerald-400 group-hover:rotate-12 transition-transform" />
-        <span>{isSr ? "Pretraga" : "Quick Search"}</span>
-        <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] text-neutral-300 font-sans border border-white/10">
-          ⌘K
-        </kbd>
-      </button>
-
-      {/* Modal Dialog */}
-      <AnimatePresence>
-        {open && (
-          <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-28 px-4">
+    <AnimatePresence>
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-28 px-4">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -434,6 +442,5 @@ export default function CommandPalette() {
           </div>
         )}
       </AnimatePresence>
-    </>
   );
 }

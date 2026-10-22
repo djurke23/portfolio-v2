@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
+import React, { createContext, useContext, useCallback, useRef, useSyncExternalStore } from "react";
 
 interface SoundContextType {
   isMuted: boolean;
@@ -13,21 +13,44 @@ interface SoundContextType {
 
 const SoundContext = createContext<SoundContextType | undefined>(undefined);
 
-export function SoundProvider({ children }: { children: React.ReactNode }) {
-  const [isMuted, setIsMuted] = useState<boolean>(false);
-  const audioCtxRef = useRef<AudioContext | null>(null);
+const STORAGE_KEY = "portfolio_sound_muted";
 
-  // Load sound preference from localStorage
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("portfolio_sound_muted");
-      if (saved !== null) {
-        setIsMuted(saved === "true");
-      }
-    } catch {
-      // Ignore localStorage errors
+function getSnapshot(): boolean {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved !== null) {
+      return saved === "true";
     }
-  }, []);
+  } catch {
+    // Ignore storage errors
+  }
+  // Default to muted for polite, non-intrusive UX
+  return true;
+}
+
+function getServerSnapshot(): boolean {
+  return true;
+}
+
+function subscribe(callback: () => void) {
+  const handleStorage = (e: StorageEvent) => {
+    if (e.key === STORAGE_KEY) {
+      callback();
+    }
+  };
+
+  window.addEventListener("storage", handleStorage);
+  window.addEventListener("local-sound-change", callback);
+
+  return () => {
+    window.removeEventListener("storage", handleStorage);
+    window.removeEventListener("local-sound-change", callback);
+  };
+}
+
+export function SoundProvider({ children }: { children: React.ReactNode }) {
+  const isMuted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const audioCtxRef = useRef<AudioContext | null>(null);
 
   const getAudioContext = useCallback(() => {
     if (typeof window === "undefined") return null;
@@ -46,15 +69,14 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const toggleMute = useCallback(() => {
-    setIsMuted((prev) => {
-      const next = !prev;
-      try {
-        localStorage.setItem("portfolio_sound_muted", String(next));
-      } catch {
-        // Ignore
-      }
-      return next;
-    });
+    try {
+      const current = getSnapshot();
+      const next = !current;
+      localStorage.setItem(STORAGE_KEY, String(next));
+      window.dispatchEvent(new Event("local-sound-change"));
+    } catch {
+      // Ignore
+    }
   }, []);
 
   // Subtle tactile click (15ms duration, 800Hz decaying to 200Hz)

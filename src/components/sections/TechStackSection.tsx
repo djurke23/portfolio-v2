@@ -7,9 +7,39 @@ import { useLanguage } from "@/context/LanguageContext";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { Code } from "lucide-react";
 
+const srTechCategoryData: Record<
+  number,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  0: {
+    title: "Front-end Inženjering",
+    description: "Izrada responzivnih, pristupačnih i visoko-performantnih korisničkih interfejsa sa čistom modularnom arhitekturom komponenti.",
+  },
+  1: {
+    title: "Back-end & Baze Podataka",
+    description: "Arhitektura pouzdanih API servisa, mikroservisa i distribuiranih baza podataka sa strogom tipskom bezbednošću.",
+  },
+  2: {
+    title: "Mobilne Aplikacije & Cloud",
+    description: "Razvoj multiplatformskih mobilnih aplikacija, nativnih mostova i serverless cloud skladišta.",
+  },
+  3: {
+    title: "Dizajn Sistemi & Kreativni Alati",
+    description: "Spoj produktnog razmišljanja, pedantnih UI/UX dizajn sistema i profesionalne video produkcije.",
+  },
+  4: {
+    title: "Inženjerski Alati & Workflow",
+    description: "Industrijski standardi za verzionisanje koda, automatsko testiranje API-ja i agilnu timsku saradnju.",
+  },
+};
+
 export default function TechStackSection() {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
-  const { dict } = useLanguage();
+  const { dict, language } = useLanguage();
+  const isSr = language === "sr";
 
   return (
     <section id="stack" className="py-24 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
@@ -21,24 +51,28 @@ export default function TechStackSection() {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {technologyCategories.map((category, catIndex) => (
-          <div
-            key={catIndex}
-            className="glass-card p-6 rounded-2xl border border-white/10 space-y-6 flex flex-col justify-between hover:border-white/20 transition-all"
-          >
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold text-white tracking-tight">
-                  {category.title}
-                </h3>
-                <span className="text-[11px] font-mono text-emerald-400 font-medium">
-                  {category.skills.length} {dict.stack.toolsCount}
-                </span>
+        {technologyCategories.map((category, catIndex) => {
+          const displayTitle = (isSr && srTechCategoryData[catIndex]?.title) || category.title;
+          const displayDesc = (isSr && srTechCategoryData[catIndex]?.description) || category.description;
+
+          return (
+            <div
+              key={catIndex}
+              className="glass-card p-6 rounded-2xl border border-white/10 space-y-6 flex flex-col justify-between hover:border-white/20 transition-all"
+            >
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-bold text-white tracking-tight">
+                    {displayTitle}
+                  </h3>
+                  <span className="text-[11px] font-mono text-emerald-400 font-medium">
+                    {category.skills.length} {dict.stack.toolsCount}
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed">
+                  {displayDesc}
+                </p>
               </div>
-              <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed">
-                {category.description}
-              </p>
-            </div>
 
             <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5">
               {category.skills.map((skill) => {
@@ -79,7 +113,8 @@ export default function TechStackSection() {
               })}
             </div>
           </div>
-        ))}
+        );
+      })}
       </div>
     </section>
   );

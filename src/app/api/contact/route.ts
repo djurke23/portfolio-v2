@@ -6,7 +6,9 @@ const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   phone: z.string().optional(),
+  services: z.array(z.string()).optional(),
   message: z.string().min(10, "Message must be at least 10 characters"),
+  _honey: z.string().optional(),
 });
 
 export async function POST(req: NextRequest) {
@@ -19,7 +21,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: errorMsg }, { status: 400 });
     }
 
-    const { name, email, phone, message } = result.data;
+    const { name, email, phone, services, message, _honey } = result.data;
+
+    // Honeypot anti-spam check: bots fill hidden fields, humans don't
+    if (_honey && _honey.trim() !== "") {
+      console.warn("Spam bot submission caught by honeypot:", { email, name });
+      return NextResponse.json(
+        { success: true, message: "Your message has been sent successfully!" },
+        { status: 200 }
+      );
+    }
     const resendApiKey = process.env.RESEND_API_KEY;
     const recipientEmail = process.env.CONTACT_EMAIL_TO || "lukadjuricdjurke@pm.me";
     const senderEmail = process.env.CONTACT_EMAIL_FROM || "Portfolio Contact <onboarding@resend.dev>";
@@ -39,6 +50,7 @@ export async function POST(req: NextRequest) {
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
             ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ""}
+            ${services && services.length > 0 ? `<p><strong>Requested Services:</strong> ${services.join(", ")}</p>` : ""}
             <div style="margin-top: 16px; padding: 12px; background: #f9f9f9; border-left: 4px solid #10b981;">
               <strong>Message:</strong>
               <p style="white-space: pre-wrap; margin-top: 8px;">${message}</p>

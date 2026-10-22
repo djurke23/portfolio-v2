@@ -2,14 +2,17 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/data/site";
-import dynamic from "next/dynamic";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ToastProvider } from "@/context/ToastContext";
 import { SoundProvider } from "@/context/SoundContext";
 import AmbientBackground from "@/components/ui/AmbientBackground";
 import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
+import BackToTop from "@/components/ui/BackToTop";
+import Analytics from "@/components/analytics/Analytics";
 
 import ClientEnhancements from "@/components/layout/ClientEnhancements";
 
@@ -180,8 +183,12 @@ export default function RootLayout({
                 <SmoothScrollProvider>
                   <ScrollProgressBar />
                   <AmbientBackground />
+                  <Navbar />
                   {children}
+                  <Footer />
+                  <BackToTop />
                   <ClientEnhancements />
+                  <Analytics />
                 </SmoothScrollProvider>
               </ToastProvider>
             </SoundProvider>

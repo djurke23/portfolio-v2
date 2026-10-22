@@ -229,19 +229,19 @@ html.light .text-neutral-200 {
 }
 
 html.light .text-neutral-300 {
-  color: #334155 !important;
+  color: #1e293b !important;
 }
 
 html.light .text-neutral-400 {
-  color: #475569 !important;
+  color: #334155 !important;
 }
 
 html.light .text-neutral-500 {
-  color: #64748b !important;
+  color: #475569 !important;
 }
 
 html.light .text-neutral-600 {
-  color: #94a3b8 !important;
+  color: #64748b !important;
 }
 
 html.light .hover\:text-white:hover {
@@ -371,6 +371,19 @@ html.light .custom-cursor .bg-white {
 
 html.light .custom-cursor span {
   color: #090a0f !important;
+}
+
+/* Floating BackToTop in light mode */
+html.light button[data-cursor="TOP"] {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  color: #090a0f !important;
+  border-color: rgba(5, 150, 105, 0.5) !important;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.12), 0 0 20px rgba(5, 150, 105, 0.25) !important;
+}
+
+html.light button[data-cursor="TOP"]:hover {
+  background-color: #ffffff !important;
+  border-color: #059669 !important;
 }
 
 /* Hide custom cursor when device doesn't support fine pointer or prefers reduced motion */

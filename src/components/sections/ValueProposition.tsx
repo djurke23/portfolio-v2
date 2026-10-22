@@ -14,10 +14,10 @@ export default function ValueProposition() {
   const { theme } = useTheme();
 
   return (
-    <section className="py-24 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
+    <section id="manifesto" className="py-24 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
       <div className="space-y-16">
         {/* Eyebrow */}
-        <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-emerald-400 font-semibold">
+        <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-emerald-400 font-semibold">
           <span className="text-neutral-500 font-normal">[01]</span>
           <span>{dict.manifesto.eyebrow}</span>
         </div>

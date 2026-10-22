@@ -15,6 +15,7 @@ export interface TranslationSchema {
     available: string;
     cv: string;
     downloadCv: string;
+    search: string;
     closeMenu: string;
     openMenu: string;
   };
@@ -44,6 +45,8 @@ export interface TranslationSchema {
   hero: {
     availability: string;
     location: string;
+    buildingBadge: string;
+    buildingProject: string;
     eyebrow: string;
     role: string;
     tagline: string;
@@ -154,6 +157,8 @@ export interface TranslationSchema {
     phoneLabel: string;
     phoneOptional: string;
     phonePlaceholder: string;
+    servicesLabel: string;
+    servicesOptional: string;
     messageLabel: string;
     messagePlaceholder: string;
     sendButton: string;
@@ -170,6 +175,35 @@ export interface TranslationSchema {
     downloadCv: string;
     copyright: string;
     builtWith: string;
+  };
+  caseStudy: {
+    backToWork: string;
+    role: string;
+    timeline: string;
+    environment: string;
+    availability: string;
+    statusLive: string;
+    downloadApp: string;
+    visitLive: string;
+    contextTitle: string;
+    challengeTitle: string;
+    solutionTitle: string;
+    archEyebrow: string;
+    archTitle: string;
+    frontendLayer: string;
+    backendLayer: string;
+    dataLayer: string;
+    storageLayer: string;
+    capabilitiesEyebrow: string;
+    capabilitiesTitle: string;
+    featurePrefix: string;
+    hurdlesEyebrow: string;
+    hurdlesTitle: string;
+    hurdlesSolution: string;
+    resultsEyebrow: string;
+    resultsTitle: string;
+    returnToPortfolio: string;
+    nextCaseStudy: string;
   };
 }
 
@@ -189,6 +223,7 @@ export const translations: Record<Language, TranslationSchema> = {
       available: "Available",
       cv: "CV",
       downloadCv: "Download CV (PDF)",
+      search: "Search",
       closeMenu: "Close menu",
       openMenu: "Open navigation menu",
     },
@@ -218,6 +253,8 @@ export const translations: Record<Language, TranslationSchema> = {
     hero: {
       availability: "Available for full-stack opportunities",
       location: "Based in Belgrade, Serbia",
+      buildingBadge: "Focus",
+      buildingProject: "CarFlo v2.0 & Cloudflare Apps",
       eyebrow: "Digital Product Engineering",
       role: "Full-Stack Developer & Product Craftsman",
       tagline:
@@ -430,6 +467,8 @@ export const translations: Record<Language, TranslationSchema> = {
       phoneLabel: "Phone Number",
       phoneOptional: "(Optional)",
       phonePlaceholder: "+381 67 ...",
+      servicesLabel: "Project Type / Services",
+      servicesOptional: "(Optional)",
       messageLabel: "Project Details / Message",
       messagePlaceholder: "Tell me about your product requirements, timeline, or objectives...",
       sendButton: "Send Message",
@@ -448,6 +487,35 @@ export const translations: Record<Language, TranslationSchema> = {
       copyright: "All rights reserved.",
       builtWith: "Designed & Engineered with Next.js, TypeScript & Tailwind CSS",
     },
+    caseStudy: {
+      backToWork: "Back to Selected Work",
+      role: "My Role",
+      timeline: "Timeline",
+      environment: "Target Environment",
+      availability: "Live Availability",
+      statusLive: "Production Live",
+      downloadApp: "Download on App Store",
+      visitLive: "Visit Live Platform",
+      contextTitle: "01. Context & Objectives",
+      challengeTitle: "The Engineering Challenge",
+      solutionTitle: "The Implemented Solution",
+      archEyebrow: "02. Deep Dive",
+      archTitle: "System Architecture & Infrastructure",
+      frontendLayer: "Frontend Layer",
+      backendLayer: "Backend & Serverless Handlers",
+      dataLayer: "Database & Relational Model",
+      storageLayer: "Cloud Storage & Media Pipeline",
+      capabilitiesEyebrow: "03. Capabilities",
+      capabilitiesTitle: "Engineered Product Features",
+      featurePrefix: "Feature",
+      hurdlesEyebrow: "04. Technical Hardships",
+      hurdlesTitle: "Engineering Challenges & Tradeoffs",
+      hurdlesSolution: "Engineered Solution:",
+      resultsEyebrow: "05. Results",
+      resultsTitle: "Production Results & Reliability",
+      returnToPortfolio: "Return to Portfolio",
+      nextCaseStudy: "Next Case Study:",
+    },
   },
   sr: {
     nav: {
@@ -464,6 +532,7 @@ export const translations: Record<Language, TranslationSchema> = {
       available: "Dostupan",
       cv: "CV",
       downloadCv: "Preuzmi CV (PDF)",
+      search: "Pretraga",
       closeMenu: "Zatvori meni",
       openMenu: "Otvori navigaciju",
     },
@@ -493,6 +562,8 @@ export const translations: Record<Language, TranslationSchema> = {
     hero: {
       availability: "Dostupan za nove projekte i pozicije",
       location: "Beograd, Srbija",
+      buildingBadge: "Fokus",
+      buildingProject: "CarFlo v2.0 & Cloudflare Apps",
       eyebrow: "Inženjering Digitalnih Proizvoda",
       role: "Full-Stack Developer & Kreator Proizvoda",
       tagline:
@@ -705,6 +776,8 @@ export const translations: Record<Language, TranslationSchema> = {
       phoneLabel: "Broj Telefona",
       phoneOptional: "(Opciono)",
       phonePlaceholder: "+381 67 ...",
+      servicesLabel: "Vrsta Projekta / Usluga",
+      servicesOptional: "(Opciono)",
       messageLabel: "Detalji Projekta / Poruka",
       messagePlaceholder: "Opišite zahteve vašeg projekta, rokove ili ciljeve...",
       sendButton: "Pošalji Poruku",
@@ -722,6 +795,35 @@ export const translations: Record<Language, TranslationSchema> = {
       downloadCv: "Preuzmi CV (PDF)",
       copyright: "Sva prava zadržana.",
       builtWith: "Dizajnirano i programirano uz Next.js, TypeScript & Tailwind CSS",
+    },
+    caseStudy: {
+      backToWork: "Nazad na radove",
+      role: "Moja Uloga",
+      timeline: "Period",
+      environment: "Ciljno Okruženje",
+      availability: "Status Dostupnosti",
+      statusLive: "Aktivno na produkciji",
+      downloadApp: "Preuzmi na App Store-u",
+      visitLive: "Poseti platformu uživo",
+      contextTitle: "01. Kontekst & Ciljevi",
+      challengeTitle: "Inženjerski Izazov",
+      solutionTitle: "Implementirano Rešenje",
+      archEyebrow: "02. Detaljna Arhitektura",
+      archTitle: "Arhitektura Sistema & Infrastruktura",
+      frontendLayer: "Frontend Sloj",
+      backendLayer: "Backend & Serverless Servisi",
+      dataLayer: "Baza Podataka & Relacioni Model",
+      storageLayer: "Cloud Storage & Media Pipeline",
+      capabilitiesEyebrow: "03. Mogućnosti",
+      capabilitiesTitle: "Ključne Funkcionalnosti Proizvoda",
+      featurePrefix: "Funkcija",
+      hurdlesEyebrow: "04. Tehnički Izazovi",
+      hurdlesTitle: "Inženjerski Izazovi & Kompromisi",
+      hurdlesSolution: "Inženjersko Rešenje:",
+      resultsEyebrow: "05. Rezultati",
+      resultsTitle: "Produkcioni Rezultati & Pouzdanost",
+      returnToPortfolio: "Povratak na portfolio",
+      nextCaseStudy: "Sledeća studija slučaja:",
     },
   },
 };

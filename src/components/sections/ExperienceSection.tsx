@@ -116,11 +116,41 @@ const srExperienceData: Record<
 
 export default function ExperienceSection() {
   const [expandedId, setExpandedId] = useState<string | null>("freelance");
+  const [activeTrack, setActiveTrack] = useState<"all" | "software" | "broadcast">("all");
   const { dict, language } = useLanguage();
+  const isSr = language === "sr";
 
   const toggleExpand = (id: string) => {
     setExpandedId((current) => (current === id ? null : id));
   };
+
+  const filteredExperiences = experiences.filter((exp) => {
+    if (activeTrack === "software") {
+      return exp.id === "freelance" || exp.id === "dms";
+    }
+    if (activeTrack === "broadcast") {
+      return exp.id.startsWith("pink-");
+    }
+    return true;
+  });
+
+  const trackTabs = [
+    {
+      id: "all" as const,
+      label: isSr ? "Sve Pozicije" : "All Roles",
+      count: experiences.length,
+    },
+    {
+      id: "software" as const,
+      label: isSr ? "Softverski Inženjering" : "Software Engineering",
+      count: experiences.filter((e) => e.id === "freelance" || e.id === "dms").length,
+    },
+    {
+      id: "broadcast" as const,
+      label: isSr ? "Robotika & Broadcast" : "Robotics & Broadcast",
+      count: experiences.filter((e) => e.id.startsWith("pink-")).length,
+    },
+  ];
 
   return (
     <section id="experience" className="py-24 sm:py-32 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
@@ -131,30 +161,69 @@ export default function ExperienceSection() {
         description={dict.experience.description}
       />
 
-      <div className="space-y-4">
-        {experiences.map((exp) => {
-          const isExpanded = expandedId === exp.id;
-          const isPinkMedia = exp.company === "Pink Media Group";
-          const isSr = language === "sr";
-          const srData = isSr ? srExperienceData[exp.id] : null;
-
-          const displayRole = srData?.role || exp.role;
-          const displayType = srData?.type || exp.type;
-          const displayLocation = srData?.location || exp.location;
-          const displayDesc = srData?.description || exp.description;
-          const displayResponsibilities = srData?.responsibilities || exp.responsibilities;
-
+      {/* Filter Tabs */}
+      <div className="flex flex-wrap gap-1.5 p-1 rounded-full bg-neutral-900/60 border border-white/10 w-fit mb-8">
+        {trackTabs.map((tab) => {
+          const isActive = activeTrack === tab.id;
           return (
-            <div
-              key={exp.id}
-              className={`glass-card rounded-2xl border transition-all duration-300 overflow-hidden group ${
-                isExpanded
-                  ? isPinkMedia
-                    ? "border-red-500/30 bg-neutral-900/80 shadow-xl shadow-black/50"
-                    : "border-emerald-500/30 bg-neutral-900/80 shadow-xl shadow-black/50"
-                  : "border-white/10 hover:border-white/20 hover:bg-white/[0.02]"
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => {
+                setActiveTrack(tab.id);
+                if (tab.id === "software") setExpandedId("freelance");
+                if (tab.id === "broadcast") setExpandedId("pink-robotics");
+              }}
+              className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+                isActive
+                  ? "bg-white text-neutral-950 shadow-sm"
+                  : "text-neutral-400 hover:text-white hover:bg-white/5"
               }`}
             >
+              <span>{tab.label}</span>
+              <span
+                className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full transition-colors ${
+                  isActive
+                    ? "bg-neutral-900/10 text-neutral-900 font-bold"
+                    : "bg-white/10 text-neutral-400"
+                }`}
+              >
+                {tab.count}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      <motion.div layout className="space-y-4">
+        <AnimatePresence mode="popLayout">
+          {filteredExperiences.map((exp) => {
+            const isExpanded = expandedId === exp.id;
+            const isPinkMedia = exp.company === "Pink Media Group";
+            const srData = isSr ? srExperienceData[exp.id] : null;
+
+            const displayRole = srData?.role || exp.role;
+            const displayType = srData?.type || exp.type;
+            const displayLocation = srData?.location || exp.location;
+            const displayDesc = srData?.description || exp.description;
+            const displayResponsibilities = srData?.responsibilities || exp.responsibilities;
+
+            return (
+              <motion.div
+                layout
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.25 }}
+                key={exp.id}
+                className={`glass-card rounded-2xl border transition-all duration-300 overflow-hidden group ${
+                  isExpanded
+                    ? isPinkMedia
+                      ? "border-red-500/30 bg-neutral-900/80 shadow-xl shadow-black/50"
+                      : "border-emerald-500/30 bg-neutral-900/80 shadow-xl shadow-black/50"
+                    : "border-white/10 hover:border-white/20 hover:bg-white/[0.02]"
+                }`}
+              >
               {/* Header Row (Clickable) */}
               <button
                 type="button"
@@ -310,10 +379,11 @@ export default function ExperienceSection() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           );
         })}
-      </div>
+        </AnimatePresence>
+      </motion.div>
     </section>
   );
 }
