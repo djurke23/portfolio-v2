@@ -72,6 +72,18 @@ const srCaseStudyOverrides: Record<
     solution:
       "Projektovana i implementirana savremena Jamstack arhitektura: Next.js 15 (App Router, Server Actions) i React 19 upareni sa Tailwind CSS v4 i Framer Motion 12. Povezana je kompletna višejezičnost (srpski, engleski, ruski, turski) preko next-intl v4, integrisan je Sanity Headless CMS sa internim Studiom na ruti /studio, a slanje upita je automatizovano preko Resend API-ja bez eksternog backend servera.",
   },
+  "carflo-web": {
+    categoryLabel: "SaaS Landing & Veb Platforma",
+    tagline: "Moderna, ultrabrza SaaS landing stranica i dvojezična web platforma sa kalkulatorom potrošnje.",
+    overview:
+      "carFlo je moderna mobilna aplikacija namenjena vozačima za digitalnu evidenciju troškova, servisnu knjižicu, praćenje potrošnje goriva i 1-tap SMS parking u Srbiji. Zadatak web platforme (carflo.app) bio je kreiranje ultrabrze, estetski besprekorne, konverzione landing stranice koja demonstrira vrednost aplikacije, gradi poverenje (social proof & trust), omogućava interaktivne alate direktno u browseru i ima punu dvojezičnu podršku (EN / SR).",
+    role: "Lead Frontend Developer & UI/UX Dizajner",
+    timeline: "2024",
+    problem:
+      "Većina SaaS landing sajtova se oslanja na teške JavaScript framework-e što dovodi do sporog učitavanja na mobilnim mrežama i lošije konverzije. Takođe, korisnicima je bilo potrebno pružiti interaktivne alate (poput kalkulatora troškova goriva i prikaza verifikovane servisne knjižice) direktno u pregledaču pre samog preuzimanja aplikacije.",
+    solution:
+      "Izabran je 'zero-dependency / zero-framework' pristup uz semantički HTML5, modularni CSS3 i Vanilla JavaScript (ES6+). Razvijen je klijentski i18n endžin bez osvežavanja stranice, adaptivni dark/light mod, pametni kalkulator goriva sa valutama (RSD/EUR) i rešen je prikaz zastavica na Windows OS-u pomoću prilagođenih SVG vektora.",
+  },
   "rev-and-chill": {
     categoryLabel: "Full-Stack Web Aplikacija",
     tagline: "Full-stack sistem za prijavu i moderaciju vozila za automobilske skupove.",

@@ -43,6 +43,7 @@ const srProjectSubtitles: Record<string, string> = {
   carflo: "Digitalni dnevnik troškova i servisiranja vozila za iOS",
   fluffyflowers: "E-commerce cvećara i radionica sa online porudžbinama",
   sunshine: "Luksuzna 4-jezična Jamstack spa platforma sa Sanity CMS-om i 119+ stranica",
+  "carflo-web": "Zvanični veb sajt i interaktivni alati za carFlo ekosistem (carflo.app)",
   "rev-and-chill": "Sistem za prijavu i moderaciju vozila za auto skupove",
   bgdcars: "Prezentacija i sajt za studio za auto detailing i zaštitu vozila",
   "inno-build": "Korporativni sajt za građevinsku i inženjersku kompaniju",

@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { getSecondaryProjects } from "@/data/projects";
 import { useLanguage } from "@/context/LanguageContext";
 import { ProjectCategory } from "@/types";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Layers } from "lucide-react";
 import { GithubIcon, FigmaIcon } from "@/components/ui/SocialIcons";
 
 export default function ProjectMatrix() {
@@ -100,7 +101,12 @@ export default function ProjectMatrix() {
               className="glass-card rounded-2xl overflow-hidden flex flex-col group border border-white/5 hover:border-white/15 transition-colors"
             >
               {/* Image Preview Container */}
-              <div className="relative aspect-[16/10] w-full bg-neutral-950 overflow-hidden border-b border-white/5">
+              <Link
+                href={project.caseStudy ? `/projects/${project.id}` : (project.liveUrl || project.githubUrl || project.figmaUrl || "#")}
+                target={project.caseStudy ? undefined : "_blank"}
+                rel={project.caseStudy ? undefined : "noopener noreferrer"}
+                className="relative aspect-[16/10] w-full bg-neutral-950 overflow-hidden border-b border-white/5 block group/link"
+              >
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -111,7 +117,7 @@ export default function ProjectMatrix() {
                 <div className="absolute top-3 left-3 px-2 py-0.5 rounded-md bg-neutral-950/80 backdrop-blur-md border border-white/10 text-[11px] font-mono text-neutral-300 uppercase">
                   {project.categoryLabel}
                 </div>
-              </div>
+              </Link>
 
               {/* Content Body */}
               <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
@@ -120,7 +126,13 @@ export default function ProjectMatrix() {
                     <span>{project.year}</span>
                   </div>
                   <h3 className="text-lg font-bold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
-                    {project.title}
+                    <Link
+                      href={project.caseStudy ? `/projects/${project.id}` : (project.liveUrl || project.githubUrl || project.figmaUrl || "#")}
+                      target={project.caseStudy ? undefined : "_blank"}
+                      rel={project.caseStudy ? undefined : "noopener noreferrer"}
+                    >
+                      {project.title}
+                    </Link>
                   </h3>
                   <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed line-clamp-3">
                     {project.description}
@@ -146,6 +158,16 @@ export default function ProjectMatrix() {
                   </div>
 
                   <div className="flex items-center gap-1 text-neutral-400">
+                    {project.caseStudy && (
+                      <Link
+                        href={`/projects/${project.id}`}
+                        aria-label={`${project.title} Case Study`}
+                        className="p-1.5 rounded-lg hover:text-white hover:bg-white/5 transition-colors"
+                        title={isSr ? "Pogledaj studiju slučaja" : "View Case Study"}
+                      >
+                        <Layers className="w-4 h-4 text-emerald-400" />
+                      </Link>
+                    )}
                     {project.githubUrl && (
                       <a
                         href={project.githubUrl}

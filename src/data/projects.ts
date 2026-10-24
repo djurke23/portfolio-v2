@@ -15,7 +15,7 @@ export const projects: Project[] = [
     tier: 1,
     year: "2024 — Present",
     appStoreUrl: "https://apps.apple.com/rs/app/carflo-car-expense-tracker/id6778638970",
-    liveUrl: "https://djurke23.github.io/CarFlo/",
+    liveUrl: "https://carflo.app",
     caseStudy: {
       overview:
         "CarFlo is an end-to-end automotive utility engineered for car enthusiasts and daily drivers alike. It solves the friction of tracking vehicle costs, maintenance history, and fuel efficiency metrics in one unified, offline-tolerant mobile interface.",
@@ -223,6 +223,97 @@ export const projects: Project[] = [
         "119+ statically generated routes serving zero-latency content across 4 languages (SR, EN, RU, TR).",
         "Eliminated developer maintenance overhead by empowering the salon to manage treatments, prices, and articles via Sanity Studio.",
         "Automated client booking inquiries routed straight to the salon management in real-time via Resend API and Server Actions.",
+      ],
+    },
+  },
+  {
+    id: "carflo-web",
+    title: "carFlo Web Platform",
+    tagline: "Modern SaaS landing page, interactive fuel calculator & bilingual web platform.",
+    description:
+      "An ultra-fast, zero-dependency marketing website and interactive tool suite built for the carFlo automotive logbook app. Engineered with semantic HTML5, modular CSS3, vanilla ES6+, custom client-side i18n engine (EN/SR), real-time fuel calculator, and verified digital service book modal.",
+    category: "website",
+    categoryLabel: "SaaS Landing & Web Platform",
+    technologies: [
+      "Semantic HTML5",
+      "Modular CSS3",
+      "Vanilla JS (ES6+)",
+      "i18n Engine",
+      "Schema.org",
+      "Lucide Icons",
+    ],
+    image: "/assets/images/carflo-web.webp",
+    featured: false,
+    tier: 2,
+    year: "2024 — Present",
+    liveUrl: "https://carflo.app",
+    githubUrl: "https://github.com/djurke23/CarFlo",
+    caseStudy: {
+      overview:
+        "carFlo is a modern iOS/Android automotive utility for digital expense tracking, verified service logs, real-world fuel consumption analytics, and 1-tap SMS parking in Serbia. The goal of the web platform was to build an ultra-fast, aesthetically pristine, high-converting landing page that demonstrates product value, establishes trust, hosts interactive browser utilities, and offers seamless bilingual support (EN/SR).",
+      role: "Lead Frontend Developer & UI/UX Designer",
+      timeline: "2024",
+      problem:
+        "Most modern SaaS landing pages rely on bloated JavaScript frameworks (React/Vue/Webpack bundles), leading to slow initial paint times on mobile cellular networks, heavy runtime dependencies, and poor conversion. Additionally, users needed interactive vehicle utilities (such as fuel cost calculations and verified digital service book previews) directly in the browser without downloading the app first.",
+      solution:
+        "Engineered a zero-dependency, pure vanilla frontend architecture leveraging Semantic HTML5, modular CSS3 custom properties, and ES6+ JavaScript. Designed a cohesive design system with dark/light themes, custom client-side i18n engine without page refreshes, and interactive browser tools while achieving perfect 100/100 Core Web Vitals.",
+      architecture: {
+        frontend:
+          "Semantic HTML5 (W3C validated), Modular CSS3 (Custom Properties & Glassmorphism), Vanilla JavaScript (ES6+), Satoshi variable typography.",
+        backend:
+          "Zero-framework static edge architecture; client-side localStorage state persistence and localized parameter routing.",
+        deployment:
+          "GitHub Pages with custom domain DNS routing (carflo.app) and Cloudflare edge CDN caching.",
+        storage:
+          "Optimized SVG vector asset pipeline and modern WebP imagery with inline critical CSS.",
+        apis: [
+          "Custom Client-Side i18n Engine",
+          "Interactive Fuel Cost Calculation Engine",
+          "Schema.org JSON-LD (MobileApplication, FAQPage)",
+        ],
+      },
+      keyFeatures: [
+        {
+          title: "Proprietary Client-Side i18n Engine",
+          desc: "Instantaneous EN/SR switching via data-i18n attributes and in-memory translation dictionaries without page reloads, persisting locale in localStorage.",
+        },
+        {
+          title: "Interactive Smart Fuel Cost Calculator",
+          desc: "Live calculation of 100km, monthly, and yearly driving costs with quick presets (Eurodiesel, Petrol, Hybrid/EV) and adaptive currency (RSD/EUR).",
+        },
+        {
+          title: "Verified Digital Service Book Modal",
+          desc: "Interactive preview demonstrating certified vehicle maintenance history (VIN, mileage, service stamp) designed to boost vehicle resale value.",
+        },
+        {
+          title: "Cross-Platform Flag Engineering",
+          desc: "Bypassed Windows OS emoji flag rendering limitations by crafting custom 21x14px SVG badges (Serbian coat of arms & Union Jack).",
+        },
+        {
+          title: "Native Dark / Light Theme Engine",
+          desc: "Auto-detection of prefers-color-scheme with manual toggle, localStorage persistence, and zero flash of unstyled content (FOUC).",
+        },
+        {
+          title: "Full Legal & Changelog Subpages",
+          desc: "Independent subpages built in the same design system: changelog.html, privacy.html, terms.html, and account deletion compliance.",
+        },
+      ],
+      challenges: [
+        {
+          challenge: "Windows OS Emoji Flag Rendering Inconsistency",
+          solution:
+            "Windows browsers fail to render country flag emojis in fonts (displaying box letters like RS/GB). Solved by engineering custom pixel-aligned SVG flag assets ensuring razor-sharp fidelity across Windows, macOS, iOS, Android, and Linux.",
+        },
+        {
+          challenge: "Sub-Second Load Times with Zero Framework Overhead",
+          solution:
+            "Eliminated client-side bundling overhead completely with vanilla ES6+ modules and scoped CSS variables, achieving sub-second LCP and a perfect 0.00 CLS across all viewports.",
+        },
+      ],
+      outcomes: [
+        "Flawless 100/100 Core Web Vitals across mobile and desktop devices with sub-second LCP and 0.00 CLS.",
+        "Zero-framework architecture resulting in an ultralight footprint and instantaneous interface transitions.",
+        "Substantially higher App Store click-through conversion rates driven by interactive in-browser calculators and verified trust badges.",
       ],
     },
   },
