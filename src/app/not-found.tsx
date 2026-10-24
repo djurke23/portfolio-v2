@@ -83,7 +83,7 @@ export default function NotFound() {
             {[
               { id: "carflo", name: "CarFlo", tag: isSr ? "iOS Aplikacija" : "iOS App" },
               { id: "fluffyflowers", name: "FluffyFlowers", tag: "E-Commerce" },
-              { id: "rev-and-chill", name: "Rev&Chill", tag: "Cloudflare Web" },
+              { id: "sunshine", name: "Sunshine", tag: isSr ? "Salon Masaže" : "Wellness & Spa" },
             ].map((p) => (
               <Link
                 key={p.id}

@@ -19,6 +19,11 @@ const srProjectTexts: Record<string, { tagline: string; description: string; cat
     description: "Digitalna prodavnica i katalog cvetnih aranžmana sa integrisanim sistemom naručivanja i responzivnim dizajnom.",
     categoryLabel: "E-Commerce & Brand Platforma",
   },
+  sunshine: {
+    tagline: "Luksuzna višejezična Jamstack platforma za salon masaže sa Sanity CMS-om.",
+    description: "Moderna četvorojezična (SR, EN, RU, TR) Jamstack platforma izgrađena uz Next.js 15, React 19, Sanity Headless CMS i Tailwind CSS v4. Poseduje 119+ statički generisanih stranica, interaktivni 'Treatment Finder' kviz, dinamički cenovnik prema trajanju, interni Sanity Studio (/studio) i 100/100 Core Web Vitals ocenu.",
+    categoryLabel: "Jamstack & Headless CMS",
+  },
   "rev-and-chill": {
     tagline: "Full-stack sistem za prijavu i moderaciju vozila za automobilske skupove.",
     description: "Serverless web aplikacija (Next.js, Cloudflare D1/R2) za automatizovanu prijavu, kuraciju učesnika i javni showcase modifikovanih vozila.",

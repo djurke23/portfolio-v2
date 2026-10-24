@@ -132,6 +132,101 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "sunshine",
+    title: "SUNSHINE — Luxury Spa & Massage",
+    tagline: "High-conversion 4-language Jamstack web platform with headless Sanity CMS and 100/100 Core Web Vitals.",
+    description:
+      "A luxury, multilingual (4 locales: SR, EN, RU, TR) Jamstack web platform engineered for an artisanal massage & wellness studio in Belgrade. Built on Next.js 15, React 19, Sanity Headless CMS, and Tailwind CSS v4, featuring 119+ SSG pre-rendered pages, an interactive Treatment Finder quiz, dynamic duration-based pricing, and full Schema.org structured SEO.",
+    category: "website",
+    categoryLabel: "Jamstack & Headless CMS",
+    technologies: [
+      "Next.js 15",
+      "React 19",
+      "TypeScript",
+      "Sanity CMS",
+      "Tailwind CSS v4",
+      "next-intl",
+      "Framer Motion",
+      "Resend",
+    ],
+    image: "/assets/images/sunshine.webp",
+    featured: true,
+    tier: 1,
+    year: "2024 — 2025",
+    liveUrl: "https://sunshine-blue-three.vercel.app",
+    caseStudy: {
+      overview:
+        "SUNSHINE is a premier luxury massage and wellness studio based in Belgrade. The platform was engineered as an ultra-fast, 4-language Jamstack web application optimized for maximum conversion, sub-second load times (100/100 Core Web Vitals), and dominant local SEO rankings. It features 119+ statically pre-rendered pages, an interactive 'Treatment Finder' recommendation quiz, dynamic duration-based pricing calculators, and a self-service Sanity CMS Studio directly embedded at /studio.",
+      role: "Lead Full-Stack Engineer & UI/UX Designer",
+      timeline: "2024 — 2025",
+      problem:
+        "Traditional spa websites suffer from sluggish WordPress templates, confusing pricing tables, lack of multilingual accessibility for foreign diplomats and tourists in Belgrade, and reliance on manual developer intervention for every single price or service tweak.",
+      solution:
+        "Architected a cutting-edge Jamstack application with Next.js 15 App Router, React 19, and Tailwind CSS v4. Integrated next-intl v4 across 4 languages with subpath routing and full Schema.org JSON-LD structured data. Deployed Sanity CMS v3 with an embedded Studio on /studio so the salon team can manage treatments, pricing, and blog content independently, while Next.js Server Actions and Resend handle instant lead delivery without external backend servers.",
+      architecture: {
+        frontend:
+          "Next.js 15 (App Router with React Server Components), React 19, TypeScript 5.7+, Tailwind CSS v4, Framer Motion 12, Lucide React.",
+        backend:
+          "Next.js Server Actions ('use server') with robust server-side schema validation and anti-spam protection.",
+        database:
+          "Sanity Headless CMS v3 with GROQ content schemas, PortableText rich text rendering, and embedded Sanity Studio (/studio).",
+        apis: [
+          "Sanity CMS Content Lake API",
+          "Resend Transactional Email API",
+          "next-intl v4 Localization Engine",
+        ],
+        deployment:
+          "Vercel Edge Network with automated CI/CD pipeline, Edge Middleware localization, and global CDN caching.",
+        storage:
+          "Cloud-hosted asset pipeline with automatic next/image conversion to Next-gen AVIF and WebP formats.",
+      },
+      keyFeatures: [
+        {
+          title: "119+ SSG Pre-Rendered Pages",
+          desc: "Statically pre-rendered routes via generateStaticParams ensuring instantaneous page navigation and zero server load.",
+        },
+        {
+          title: "Quad-Language i18n Architecture",
+          desc: "Complete localization across Serbian, English, Russian, and Turkish via next-intl v4 with localized routes and dynamic hreflang tags.",
+        },
+        {
+          title: "Interactive 'Treatment Finder' Quiz",
+          desc: "Custom client-side diagnostic component matching user goals (stress relief, back pain, sports recovery) to ideal therapeutic sessions.",
+        },
+        {
+          title: "Dynamic Duration-Based Pricing",
+          desc: "Interactive category filtering and on-the-fly price computation across 30, 60, 90, and 120-minute session intervals.",
+        },
+        {
+          title: "Embedded Sanity Studio CMS",
+          desc: "Native /studio dashboard enabling the client to autonomously update services, pricing tiers, and publish multilingual blog posts.",
+        },
+        {
+          title: "Exhaustive Schema.org JSON-LD SEO",
+          desc: "Rich structured data for LocalBusiness/DaySpa, Service catalog, FAQPage, Article, and BreadcrumbList for top Google SERP visibility.",
+        },
+      ],
+      challenges: [
+        {
+          challenge: "Scalable Multi-Locale Static Generation with Headless CMS",
+          solution:
+            "Harmonized next-intl routing with Sanity GROQ queries inside generateStaticParams, compiling 119+ localized pages statically while maintaining on-demand ISR revalidation on CMS publish.",
+        },
+        {
+          challenge: "Sub-Second LCP & Zero CLS on High-Resolution Visual Assets",
+          solution:
+            "Implemented Tailwind CSS v4's CSS-first engine, localized font preloading, and dynamic AVIF/WebP image transforms via Next.js and Vercel Edge caching to achieve a flat 100/100 Core Web Vitals rating.",
+        },
+      ],
+      outcomes: [
+        "Achieved 100/100 Core Web Vitals & Lighthouse score across mobile and desktop devices.",
+        "119+ statically generated routes serving zero-latency content across 4 languages (SR, EN, RU, TR).",
+        "Eliminated developer maintenance overhead by empowering the salon to manage treatments, prices, and articles via Sanity Studio.",
+        "Automated client booking inquiries routed straight to the salon management in real-time via Resend API and Server Actions.",
+      ],
+    },
+  },
+  {
     id: "rev-and-chill",
     title: "Rev&Chill",
     tagline: "Automotive event registration system and vehicle showcase platform.",
@@ -141,8 +236,8 @@ export const projects: Project[] = [
     categoryLabel: "Full-Stack Web App",
     technologies: ["Next.js", "TypeScript", "Cloudflare D1", "Cloudflare R2", "Tailwind CSS", "Server Actions"],
     image: "/assets/images/rev-and-chill.webp",
-    featured: true,
-    tier: 1,
+    featured: false,
+    tier: 2,
     year: "2024 — Present",
     liveUrl: "https://rev-and-chill-3.vercel.app",
     caseStudy: {

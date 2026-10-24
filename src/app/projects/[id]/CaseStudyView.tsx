@@ -60,6 +60,18 @@ const srCaseStudyOverrides: Record<
     solution:
       "Razvijena izuzetno brza React i TypeScript aplikacija pogonjena Vite alatom i Tailwind CSS sistemom. Implementiran modularni katalog artikala, interaktivna korpa i automatizovano rutiranje porudžbina direktno do radionice.",
   },
+  sunshine: {
+    categoryLabel: "Jamstack & Headless CMS Platforma",
+    tagline: "Moderna, višejezična Jamstack web platforma sa Sanity CMS-om i 100/100 Core Web Vitals ocenom.",
+    overview:
+      "SUNSHINE je luksuzni salon za profesionalne masaže i velnes u Beogradu. Projekat je realizovan kao napredna, četvorojezična Jamstack platforma optimizovana za visoku stopu konverzije, munjevite performanse (100/100 Core Web Vitals) i besprekoran lokalni SEO. Platforma poseduje preko 119 statički pre-renderovanih stranica, interaktivni 'Treatment Finder' kviz za preporuku masaža, dinamički cenovnik prema trajanju tretmana (30, 60, 90, 120 min) i Sanity Headless CMS sa ugrađenim Studiom (/studio) koji klijentu omogućava samostalno uređivanje ponude.",
+    role: "Lead Full-Stack Inženjer & UI/UX Dizajner",
+    timeline: "2024 — 2025",
+    problem:
+      "Uobičajeni sajtovi salona pate od sporih i zastarelih platformi, nepreglednih cenovnika i nedostatka višejezične podrške za inostrane posetioce i diplomate u Beogradu. Pored toga, svaka promena cena ili uvođenje novog tretmana zahtevali su intervenciju programera.",
+    solution:
+      "Projektovana i implementirana savremena Jamstack arhitektura: Next.js 15 (App Router, Server Actions) i React 19 upareni sa Tailwind CSS v4 i Framer Motion 12. Povezana je kompletna višejezičnost (srpski, engleski, ruski, turski) preko next-intl v4, integrisan je Sanity Headless CMS sa internim Studiom na ruti /studio, a slanje upita je automatizovano preko Resend API-ja bez eksternog backend servera.",
+  },
   "rev-and-chill": {
     categoryLabel: "Full-Stack Web Aplikacija",
     tagline: "Full-stack sistem za prijavu i moderaciju vozila za automobilske skupove.",
