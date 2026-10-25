@@ -153,7 +153,7 @@ export const projects: Project[] = [
     featured: true,
     tier: 1,
     year: "2024 — 2025",
-    liveUrl: "https://sunshine-blue-three.vercel.app",
+    liveUrl: "https://sunshinesalonzamasazu.rs",
     caseStudy: {
       overview:
         "SUNSHINE is a premier luxury massage and wellness studio based in Belgrade. The platform was engineered as an ultra-fast, 4-language Jamstack web application optimized for maximum conversion, sub-second load times (100/100 Core Web Vitals), and dominant local SEO rankings. It features 119+ statically pre-rendered pages, an interactive 'Treatment Finder' recommendation quiz, dynamic duration-based pricing calculators, and a self-service Sanity CMS Studio directly embedded at /studio.",
