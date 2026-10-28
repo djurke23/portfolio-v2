@@ -81,8 +81,8 @@ export default function NotFound() {
           </span>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {[
+              { id: "the-system-awakening", name: "The System", tag: isSr ? "Web & Mobilna App" : "Web & Mobile App" },
               { id: "carflo", name: "CarFlo", tag: isSr ? "iOS Aplikacija" : "iOS App" },
-              { id: "fluffyflowers", name: "FluffyFlowers", tag: "E-Commerce" },
               { id: "sunshine", name: "Sunshine", tag: isSr ? "Salon Masaže" : "Wellness & Spa" },
             ].map((p) => (
               <Link

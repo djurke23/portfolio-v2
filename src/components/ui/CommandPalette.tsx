@@ -40,6 +40,7 @@ interface PaletteItem {
 }
 
 const srProjectSubtitles: Record<string, string> = {
+  "the-system-awakening": "Gamifikovani Solo Leveling HUD sistem navika, beta anketa i predstojeća web i mobilna app",
   carflo: "Digitalni dnevnik troškova i servisiranja vozila za iOS",
   fluffyflowers: "E-commerce cvećara i radionica sa online porudžbinama",
   sunshine: "Luksuzna 4-jezična Jamstack spa platforma sa Sanity CMS-om i 119+ stranica",

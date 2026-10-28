@@ -36,6 +36,18 @@ const srCaseStudyOverrides: Record<
     timeline?: string;
   }
 > = {
+  "the-system-awakening": {
+    categoryLabel: "Web & Mobilni Ekosistem",
+    tagline: "Gamifikovani ekosistem za produktivnost inspirisan Solo Leveling sistemom — beta registracija i predstojeća web i mobilna aplikacija.",
+    overview:
+      "The System: Awakening je ambiciozan gamifikovani ekosistem za lični razvoj i građenje navika, osmišljen da svakodnevni napredak (trening, učenje, rad, disciplina) pretvori u RPG iskustvo napredovanja lovaca inspirisano Solo Leveling konceptom. Prva faza je lansirana kao 'Founder Hunter Application' terminal za registraciju i selekciju 100 beta testera, dok se paralelno pripremaju sveobuhvatna web platforma i mobilne aplikacije za iOS i Android.",
+    role: "Glavni Arhitekta & Full-Stack Programer",
+    timeline: "2025 — Danas",
+    problem:
+      "Većina aplikacija za praćenje navika i produktivnost pati od jednoličnog, dosadnog interfejsa zbog čega korisnici brzo odustaju. Takođe, lansiranje kompleksnog multiplatformskog sistema zahteva detaljnu validaciju, prikupljanje povratnih informacija i formiranje posvećene zajednice testera pre konačnog lansiranja cloud infrastrukture i mobilnih verzija.",
+    solution:
+      "Izgrađen je imerzivni cyberpunk terminal na Vercel Edge infrastrukturi sa trenutnim odzivom i validacijom podataka za selekciju 'Founder Hunter' testera. Postavljena je arhitektura budućeg multiplatformskog ekosistema koji spaja Next.js web platformu i nativne mobilne aplikacije (iOS & Android) sa dnevnim quest-ovima, atributima (snaga, agilnost, inteligencija), lovačkim rangovima i Discord integracijom.",
+  },
   carflo: {
     categoryLabel: "Mobilna & Cloud Platforma",
     tagline: "Vrhunski digitalni dnevnik troškova i održavanja vozila za iOS.",

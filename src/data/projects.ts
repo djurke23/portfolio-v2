@@ -2,6 +2,84 @@ import { Project } from "@/types";
 
 export const projects: Project[] = [
   {
+    id: "the-system-awakening",
+    title: "The System: Awakening",
+    tagline: "Gamified self-improvement ecosystem inspired by the Solo Leveling HUD — closed beta intake with full web & mobile apps in development.",
+    description:
+      "A dark-futuristic, gamified productivity and habit-tracking ecosystem inspired by Solo Leveling. Currently deployed as the Founder Hunter registration terminal to recruit and onboard the first 100 closed-beta testers, with a full web platform and native iOS & Android mobile applications currently in active development.",
+    category: "web-app",
+    categoryLabel: "Web & Mobile Ecosystem",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel", "Mobile App (iOS/Android)", "Cyberpunk HUD"],
+    image: "/assets/images/the-system-awakening.webp",
+    featured: true,
+    tier: 1,
+    year: "2025 — Present",
+    liveUrl: "https://www.thesystemawakening.com",
+    caseStudy: {
+      overview:
+        "The System: Awakening is an ambitious gamified lifestyle and habit-tracking ecosystem engineered to transform real-world self-improvement (fitness, academics, coding, and discipline) into an RPG-style Hunter leveling experience inspired by Solo Leveling. The initial phase is live as the 'Founder Hunter Application' — a custom terminal portal capturing beta cohort qualifications, platform preferences, and daily commitment levels ahead of the upcoming web platform and cross-platform mobile release.",
+      role: "Lead Architect & Full-Stack Developer",
+      timeline: "2025 — Present",
+      problem:
+        "Most habit-tracking and productivity apps feel sterile, uninspiring, or tedious to maintain, resulting in rapid user drop-off. Furthermore, launching a complex cross-platform system requires rigorous early validation and community alignment from dedicated power users before rolling out full cloud infrastructure and mobile builds.",
+      solution:
+        "Engineered an immersive, cyberpunk-inspired terminal onboarding portal on Vercel Edge with zero latency, retro-futuristic sound effects, and real-time form validation to vet Founder Hunters. Architected the upcoming multiplatform system combining a Next.js web application with cross-platform mobile apps (iOS & Android) featuring daily quest loops, stat attributes (STR, AGI, INT), hunter rank tiers, and Discord community integration.",
+      architecture: {
+        frontend:
+          "Next.js & React with Tailwind CSS, custom CRT scanline cybernetic HUD styling, responsive glassmorphic cards, and interactive audio feedback.",
+        backend:
+          "Serverless Edge API endpoints with strict input sanitization, rate limiting, and automated webhook dispatching for candidate intake.",
+        database:
+          "High-throughput serverless relational data store structured for candidate profiling, cohort categorisation, and upcoming player state sync.",
+        apis: [
+          "Vercel Edge Functions",
+          "Discord Webhook Integration",
+          "Web Audio API",
+          "Vercel Analytics",
+        ],
+        deployment:
+          "Vercel Edge Network with global DNS routing and instant SSL via custom domain (thesystemawakening.com).",
+        storage:
+          "Optimized vector assets and lightweight cyberpunk visual components with zero third-party script bloat.",
+      },
+      keyFeatures: [
+        {
+          title: "Founder Hunter Selection Protocol",
+          desc: "Custom-built qualification portal capturing device targets (iOS/Android), discipline paths (Gym, Study, Work, Discipline), and activity tiers.",
+        },
+        {
+          title: "Immersive Cyberpunk Terminal HUD",
+          desc: "High-contrast neon cyan aesthetic with CRT scanlines, terminal diagnostics, audio effects, and responsive mobile-first controls.",
+        },
+        {
+          title: "Upcoming Multiplatform Ecosystem",
+          desc: "Full web portal and native iOS & Android mobile apps currently in active development, bringing real-life RPG stat progression.",
+        },
+        {
+          title: "Automated Community Pipeline",
+          desc: "Seamless triage pipeline connecting applicant data directly to Discord and communication channels for rapid closed-beta onboarding.",
+        },
+      ],
+      challenges: [
+        {
+          challenge: "Creating an Engaging Lore-Driven Experience with Zero Performance Penalties",
+          solution:
+            "Authored lightweight CSS scanlines and modular styling instead of heavy canvas or WebGL libraries, keeping initial load sub-second even on mobile networks.",
+        },
+        {
+          challenge: "Architecting Cross-Platform Data Sync Across Web and Upcoming Mobile Apps",
+          solution:
+            "Structured an extensible schema for hunter profiles, daily quest completion states, and offline-tolerant synchronization designed for the upcoming mobile builds.",
+        },
+      ],
+      outcomes: [
+        "Live production onboarding terminal deployed on thesystemawakening.com.",
+        "Successfully gathering qualified closed-beta candidates across iOS and Android ecosystems.",
+        "Active engineering underway on the full web application and mobile companion apps.",
+      ],
+    },
+  },
+  {
     id: "carflo",
     title: "CarFlo Ecosystem",
     tagline: "The ultimate digital vehicle logbook and expense management ecosystem.",

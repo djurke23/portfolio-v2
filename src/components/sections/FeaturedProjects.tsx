@@ -9,6 +9,11 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import { ArrowUpRight, ArrowRight, Smartphone, ExternalLink, Layers } from "lucide-react";
 
 const srProjectTexts: Record<string, { tagline: string; description: string; categoryLabel: string }> = {
+  "the-system-awakening": {
+    tagline: "Gamifikovani ekosistem za produktivnost inspirisan Solo Leveling sistemom — beta registracija i predstojeća web i mobilna app.",
+    description: "Sajberpank gamifikovani sistem za praćenje navika i lični razvoj inspirisan Solo Leveling estetikom. Trenutno je aktivan Founder Hunter portal za selekciju prvih 100 beta testera, dok su kompletan web sajt i mobilna aplikacija (iOS & Android) u aktivnoj fazi razvoja.",
+    categoryLabel: "Web & Mobilni Ekosistem",
+  },
   carflo: {
     tagline: "Vrhunski digitalni dnevnik troškova i održavanja vozila za iOS.",
     description: "Kompletna mobilna platforma za praćenje troškova i servisa vozila dostupna na Apple App Store-u sa offline sinhronizacijom.",
