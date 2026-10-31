@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import { useLanguage } from "@/context/LanguageContext";
 import { useToast } from "@/context/ToastContext";
@@ -32,12 +31,7 @@ export default function HeroSection() {
     <section className="relative min-h-[90vh] md:min-h-screen flex flex-col justify-center pt-28 pb-16 px-4 sm:px-6 max-w-6xl mx-auto">
       <div className="space-y-8 max-w-4xl">
         {/* Top Status & Positioning */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center gap-3"
-        >
+        <div className="flex flex-wrap items-center gap-3 hero-animate">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-400">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -50,50 +44,31 @@ export default function HeroSection() {
             <MapPin className="w-3.5 h-3.5 text-neutral-500" />
             <span>{dict.hero.location}</span>
           </div>
-        </motion.div>
+        </div>
 
         {/* Hero Title */}
         <div className="space-y-2">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="hero-animate hero-delay-1">
             <span className="text-xs sm:text-sm font-mono uppercase tracking-widest text-neutral-500 font-medium">
               {dict.hero.eyebrow}
             </span>
             <h1 className="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-white uppercase font-mono mt-1">
               {siteConfig.name}
             </h1>
-          </motion.div>
+          </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-xl sm:text-2xl md:text-3xl font-light text-neutral-300 tracking-tight"
-          >
+          <p className="text-xl sm:text-2xl md:text-3xl font-light text-neutral-300 tracking-tight hero-animate hero-delay-2">
             {dict.hero.role}
-          </motion.p>
+          </p>
         </div>
 
         {/* Narrative Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="text-base sm:text-lg md:text-xl text-neutral-400 max-w-2xl leading-relaxed font-light"
-        >
+        <p className="text-base sm:text-lg md:text-xl text-neutral-400 max-w-2xl leading-relaxed font-light hero-animate hero-delay-3">
           {dict.hero.tagline}
-        </motion.p>
+        </p>
 
         {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center gap-3 sm:gap-4 pt-4"
-        >
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-4 hero-animate hero-delay-4">
           <MagneticButton strength={0.3}>
             <a
               href="#work"
@@ -152,23 +127,18 @@ export default function HeroSection() {
             <span>{dict.hero.downloadCv}</span>
             <span className="text-xs text-neutral-500 font-normal">(PDF)</span>
           </a>
-        </motion.div>
+        </div>
       </div>
 
       {/* Floating Subtleties */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 1 }}
-        className="mt-16 sm:mt-24 pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-6 text-xs font-mono text-neutral-500"
-      >
+      <div className="mt-16 sm:mt-24 pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-6 text-xs font-mono text-neutral-500 hero-animate hero-delay-5">
         <div className="flex items-center">
           <span>{dict.hero.footerTech}</span>
         </div>
         <div>
           <span>{dict.hero.footerProcess}</span>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

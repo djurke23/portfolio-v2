@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { impactStats } from "@/data/stats";
 import { useLanguage } from "@/context/LanguageContext";
-import { motion, useInView, animate } from "framer-motion";
+import { useInView, animate } from "framer-motion";
 import { TrendingUp } from "lucide-react";
 
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
@@ -64,13 +64,15 @@ export default function StatsBanner() {
           const sublabel = isSr ? stat.sublabel.sr : stat.sublabel.en;
 
           return (
-            <motion.div
+            <div
               key={stat.id}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass-card p-5 sm:p-7 rounded-2xl border border-white/10 hover:border-emerald-500/30 transition-all duration-300 relative group overflow-hidden"
+              className={`glass-card p-5 sm:p-7 rounded-2xl border border-white/10 hover:border-emerald-500/30 transition-all duration-300 relative group overflow-hidden hero-animate ${
+                index === 0
+                  ? "hero-delay-3"
+                  : index === 1
+                  ? "hero-delay-4"
+                  : "hero-delay-5"
+              }`}
             >
               {/* Subtle hover glow (desktop only) */}
               <div className="hidden sm:block absolute -top-12 -right-12 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all pointer-events-none" />
@@ -87,7 +89,7 @@ export default function StatsBanner() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           );
         })}
       </div>

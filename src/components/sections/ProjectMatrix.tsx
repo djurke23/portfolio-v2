@@ -88,15 +88,15 @@ export default function ProjectMatrix() {
       </div>
 
       {/* Grid of Projects */}
-      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <AnimatePresence>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <AnimatePresence mode="popLayout">
           {filtered.map((project) => (
             <motion.div
-              layout
+              layout="position"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.25 }}
               key={project.id}
               className="glass-card rounded-2xl overflow-hidden flex flex-col group border border-white/5 hover:border-white/15 transition-colors"
             >
@@ -212,7 +212,7 @@ export default function ProjectMatrix() {
             </motion.div>
           ))}
         </AnimatePresence>
-      </motion.div>
+      </div>
     </section>
   );
 }

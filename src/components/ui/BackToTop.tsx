@@ -25,16 +25,8 @@ export default function BackToTop() {
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    let lenisTimer: NodeJS.Timeout;
     if (window.__lenis) {
       window.__lenis.on("scroll", handleScroll);
-    } else {
-      lenisTimer = setInterval(() => {
-        if (window.__lenis) {
-          window.__lenis.on("scroll", handleScroll);
-          clearInterval(lenisTimer);
-        }
-      }, 200);
     }
 
     return () => {
@@ -42,7 +34,6 @@ export default function BackToTop() {
       if (window.__lenis) {
         window.__lenis.off("scroll", handleScroll);
       }
-      if (lenisTimer) clearInterval(lenisTimer);
     };
   }, []);
 

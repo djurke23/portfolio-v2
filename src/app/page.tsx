@@ -1,68 +1,87 @@
 import React from "react";
-import dynamic from "next/dynamic";
 import HeroSection from "@/components/sections/HeroSection";
 import StatsBanner from "@/components/sections/StatsBanner";
-
-// Dynamically split below-the-fold sections into separate chunks
-const ValueProposition = dynamic(() => import("@/components/sections/ValueProposition"));
-const FeaturedProjects = dynamic(() => import("@/components/sections/FeaturedProjects"));
-const ProjectMatrix = dynamic(() => import("@/components/sections/ProjectMatrix"));
-const ServicesSection = dynamic(() => import("@/components/sections/ServicesSection"));
-const EngineeringDesign = dynamic(() => import("@/components/sections/EngineeringDesign"));
-const TechStackSection = dynamic(() => import("@/components/sections/TechStackSection"));
-const ExperienceSection = dynamic(() => import("@/components/sections/ExperienceSection"));
-const AboutSection = dynamic(() => import("@/components/sections/AboutSection"));
-const GearSection = dynamic(() => import("@/components/sections/GearSection"));
-const TestimonialsSection = dynamic(() => import("@/components/sections/TestimonialsSection"));
-const FAQSection = dynamic(() => import("@/components/sections/FAQSection"));
-const ContactSection = dynamic(() => import("@/components/sections/ContactSection"));
+import ValueProposition from "@/components/sections/ValueProposition";
+import FeaturedProjects from "@/components/sections/FeaturedProjects";
+import ProjectMatrix from "@/components/sections/ProjectMatrix";
+import ServicesSection from "@/components/sections/ServicesSection";
+import EngineeringDesign from "@/components/sections/EngineeringDesign";
+import TechStackSection from "@/components/sections/TechStackSection";
+import ExperienceSection from "@/components/sections/ExperienceSection";
+import AboutSection from "@/components/sections/AboutSection";
+import GearSection from "@/components/sections/GearSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import FAQSection from "@/components/sections/FAQSection";
+import ContactSection from "@/components/sections/ContactSection";
 
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-[#070709] text-white selection:bg-emerald-500/30 selection:text-white">
       {/* Main Content Flow */}
       <main className="relative z-10">
-        {/* 1. Hero Section */}
+        {/* 1. Hero Section (Immediate above-the-fold render) */}
         <HeroSection />
 
-        {/* 2. Impact Statistics & Track Record */}
+        {/* 2. Impact Statistics & Track Record (Immediate) */}
         <StatsBanner />
 
         {/* 3. Core Proposition / Manifesto */}
         <ValueProposition />
 
         {/* 4. Flagship Selected Work (Tier 1) */}
-        <FeaturedProjects />
+        <div className="section-deferred">
+          <FeaturedProjects />
+        </div>
 
         {/* 5. Secondary Project Matrix & Archive */}
-        <ProjectMatrix />
+        <div className="section-deferred">
+          <ProjectMatrix />
+        </div>
 
         {/* 6. Bespoke Services & Deliverables */}
-        <ServicesSection />
+        <div className="section-deferred">
+          <ServicesSection />
+        </div>
 
         {/* 7. Engineering + Design + Motion Differentiator */}
-        <EngineeringDesign />
+        <div className="section-deferred">
+          <EngineeringDesign />
+        </div>
 
         {/* 8. Technology Matrix */}
-        <TechStackSection />
+        <div className="section-deferred">
+          <TechStackSection />
+        </div>
 
         {/* 9. Work Experience Timeline */}
-        <ExperienceSection />
+        <div className="section-deferred">
+          <ExperienceSection />
+        </div>
 
         {/* 10. Education & Academic Background */}
-        <AboutSection />
+        <div className="section-deferred">
+          <AboutSection />
+        </div>
 
         {/* 11. Studio Setup & Hardware Gear */}
-        <GearSection />
+        <div className="section-deferred">
+          <GearSection />
+        </div>
 
         {/* 12. Client Endorsements & Reviews */}
-        <TestimonialsSection />
+        <div className="section-deferred">
+          <TestimonialsSection />
+        </div>
 
         {/* 13. Frequently Asked Questions (Technical & Business) */}
-        <FAQSection />
+        <div className="section-deferred">
+          <FAQSection />
+        </div>
 
         {/* 14. Contact & Inquiries */}
-        <ContactSection />
+        <div className="section-deferred">
+          <ContactSection />
+        </div>
       </main>
     </div>
   );
