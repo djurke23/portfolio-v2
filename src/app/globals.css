@@ -143,6 +143,28 @@ html.has-seen-intro #app-preloader-root {
   display: none !important;
 }
 
+/* Infinite Marquee Animation */
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 40s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover,
+.marquee-container:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
 /* ==========================================================================
    LIGHT MODE DESIGN SYSTEM
    Titanium paper aesthetic inspired by Apple & Linear

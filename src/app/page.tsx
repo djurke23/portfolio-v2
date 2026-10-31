@@ -1,5 +1,6 @@
 import React from "react";
 import HeroSection from "@/components/sections/HeroSection";
+import Marquee from "@/components/ui/Marquee";
 import StatsBanner from "@/components/sections/StatsBanner";
 import ValueProposition from "@/components/sections/ValueProposition";
 import FeaturedProjects from "@/components/sections/FeaturedProjects";
@@ -21,6 +22,9 @@ export default function Home() {
       <main className="relative z-10">
         {/* 1. Hero Section (Immediate above-the-fold render) */}
         <HeroSection />
+
+        {/* Infinite Tech Marquee Loop */}
+        <Marquee />
 
         {/* 2. Impact Statistics & Track Record (Immediate) */}
         <StatsBanner />
