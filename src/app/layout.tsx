@@ -12,6 +12,7 @@ import { SoundProvider } from "@/context/SoundContext";
 import AmbientBackground from "@/components/ui/AmbientBackground";
 import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
 import BackToTop from "@/components/ui/BackToTop";
+import LoadingScreen from "@/components/ui/LoadingScreen";
 import Analytics from "@/components/analytics/Analytics";
 
 import ClientEnhancements from "@/components/layout/ClientEnhancements";
@@ -185,6 +186,7 @@ export default function RootLayout({
             <SoundProvider>
               <ToastProvider>
                 <SmoothScrollProvider>
+                  <LoadingScreen />
                   <ScrollProgressBar />
                   <AmbientBackground />
                   <Navbar />

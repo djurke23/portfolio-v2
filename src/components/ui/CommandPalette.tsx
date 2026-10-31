@@ -231,6 +231,17 @@ export default function CommandPalette() {
           setOpen(false);
         },
       },
+      {
+        id: "replay-loader",
+        group: "actions",
+        title: isSr ? "Ponovo pokreni Intro animaciju" : "Replay Intro Screen",
+        subtitle: isSr ? "Prikaz početnog ekrana sa telemetrijom" : "Show system telemetry loading animation",
+        icon: <Sparkles className="w-4 h-4 text-emerald-400" />,
+        onSelect: () => {
+          setOpen(false);
+          window.dispatchEvent(new CustomEvent("replay-loading-screen"));
+        },
+      },
 
       // Navigation Links
       {
