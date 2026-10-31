@@ -68,4 +68,19 @@ export const technologyCategories: TechnologyCategory[] = [
       { name: "Linux / macOS", highlighted: false },
     ],
   },
+  {
+    title: "AI & Agentic Workflows",
+    description: "Accelerating engineering velocity, deep research, prompt orchestration, and intelligent automation pipelines.",
+    skills: [
+      { name: "Claude 3.5 Sonnet", icon: "/assets/icons/claude.svg", highlighted: true },
+      { name: "ChatGPT (GPT-4o)", icon: "/assets/icons/chatgpt.svg", highlighted: true },
+      { name: "Gemini 1.5 Pro", icon: "/assets/icons/gemini.svg", highlighted: true },
+      { name: "Perplexity AI", icon: "/assets/icons/perplexity.svg", highlighted: true },
+      { name: "Cursor AI", icon: "/assets/icons/cursor.svg", highlighted: true },
+      { name: "NotebookLM", icon: "/assets/icons/notebooklm.svg", highlighted: true },
+      { name: "n8n (AI Automation)", icon: "/assets/icons/n8n.svg", highlighted: true },
+      { name: "Midjourney v6", icon: "/assets/icons/midjourney.svg", highlighted: false },
+      { name: "v0 by Vercel", icon: "/assets/icons/v0.svg", highlighted: false },
+    ],
+  },
 ];

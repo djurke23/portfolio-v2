@@ -34,6 +34,10 @@ const srTechCategoryData: Record<
     title: "Inženjerski Alati & Workflow",
     description: "Industrijski standardi za verzionisanje koda, automatsko testiranje API-ja i agilnu timsku saradnju.",
   },
+  5: {
+    title: "AI Alati & Automatizacija",
+    description: "Maksimalna brzina razvoja, prompt inženjering, duboko istraživanje i automatizovani radni tokovi uz vodeće LLM modele.",
+  },
 };
 
 export default function TechStackSection() {
