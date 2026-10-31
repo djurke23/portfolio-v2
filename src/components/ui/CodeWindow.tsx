@@ -119,11 +119,22 @@ function highlightLineTokens(line: string) {
   });
 }
 
-function CodeEditorView({ code }: { code: string }) {
+function CodeEditorView({
+  code,
+  canType,
+}: {
+  code: string;
+  canType: boolean;
+}) {
   const [charCount, setCharCount] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!canType) {
+      setCharCount(0);
+      return;
+    }
+
     let current = 0;
     const interval = setInterval(() => {
       current += 1;
@@ -134,7 +145,7 @@ function CodeEditorView({ code }: { code: string }) {
     }, 13);
 
     return () => clearInterval(interval);
-  }, [code]);
+  }, [code, canType]);
 
   // Smoothly scroll down as code types so the active cursor stays in view
   useEffect(() => {
@@ -165,6 +176,49 @@ function CodeEditorView({ code }: { code: string }) {
 export default function CodeWindow() {
   const [active, setActive] = useState<"go" | "ts">("go");
   const [time, setTime] = useState("3:09:02 AM");
+  const [canType, setCanType] = useState(false);
+
+  // Synchronize typing with the cinematic loading screen
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    // Has user already seen/completed intro previously?
+    const hasSeenIntro =
+      sessionStorage.getItem("portfolio_intro_seen") === "true" &&
+      !window.location.search.includes("loader=1");
+
+    // Check whether the preloader DOM element is actively mounted
+    const preloaderElement = document.getElementById("app-preloader-root");
+    const isIntroActive = !hasSeenIntro || preloaderElement !== null;
+
+    if (!isIntroActive) {
+      // Intro already finished before: start typing after smooth initial hero entrance
+      const startTimer = setTimeout(() => {
+        setCanType(true);
+      }, 400);
+      return () => clearTimeout(startTimer);
+    }
+
+    // Intro is currently active on screen: wait until curtain finishes lifting
+    const handleIntroFinish = () => {
+      // 450ms pause gives the user time to see the CodeWindow reveal itself before typing begins
+      setTimeout(() => {
+        setCanType(true);
+      }, 450);
+    };
+
+    const handleIntroReplay = () => {
+      setCanType(false);
+    };
+
+    window.addEventListener("intro-finish", handleIntroFinish);
+    window.addEventListener("replay-loading-screen", handleIntroReplay);
+
+    return () => {
+      window.removeEventListener("intro-finish", handleIntroFinish);
+      window.removeEventListener("replay-loading-screen", handleIntroReplay);
+    };
+  }, []);
 
   // Live Belgrade production time
   useEffect(() => {
@@ -240,6 +294,7 @@ export default function CodeWindow() {
         <CodeEditorView
           key={active}
           code={active === "go" ? goCode : tsCode}
+          canType={canType}
         />
         {/* Bottom subtle gradient fade mask to guarantee code never harshly touches the bottom edge */}
         <div className="pointer-events-none absolute bottom-0 inset-x-0 h-6 bg-gradient-to-t from-[#111111] to-transparent" />
