@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useSyncExternalStore } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { useSound } from "@/context/SoundContext";
@@ -30,8 +29,9 @@ function getClientSnapshot(): boolean {
   }
 }
 
+// Render in initial SSR HTML so preloader is visible on frame 0 with zero flash of site
 function getServerSnapshot(): boolean {
-  return true;
+  return false;
 }
 
 export default function LoadingScreen() {
@@ -66,7 +66,7 @@ export default function LoadingScreen() {
     playOpen();
   }, [playOpen]);
 
-  // Lock scroll when visible
+  // Lock scroll when visible and drive progress
   useEffect(() => {
     if (!isVisible) return;
 
@@ -77,7 +77,7 @@ export default function LoadingScreen() {
     }
 
     const startTime = performance.now();
-    const duration = 1350;
+    const duration = 1250;
 
     const interval = setInterval(() => {
       const elapsed = performance.now() - startTime;
@@ -89,7 +89,7 @@ export default function LoadingScreen() {
 
       if (t >= 1) {
         clearInterval(interval);
-        setTimeout(handleFinish, 220);
+        setTimeout(handleFinish, 180);
       }
     }, 20);
 
@@ -112,7 +112,7 @@ export default function LoadingScreen() {
     };
   }, [isVisible, handleFinish]);
 
-  // Listen for replay requests
+  // Listen for manual replay requests
   useEffect(() => {
     const handleReplayEvent = () => {
       setProgress(0);
@@ -141,11 +141,12 @@ export default function LoadingScreen() {
     <AnimatePresence>
       {isVisible && (
         <motion.div
+          id="app-preloader-root"
           key="preloader"
           initial={{ y: 0 }}
           exit={{ y: "-100%" }}
           transition={{
-            duration: 0.85,
+            duration: 0.8,
             ease: [0.76, 0, 0.24, 1],
           }}
           onClick={handleFinish}
@@ -156,7 +157,7 @@ export default function LoadingScreen() {
           <div className="absolute inset-0 bg-dot-pattern opacity-30 pointer-events-none" />
 
           {/* Ambient center glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.08)_0%,transparent_70%)] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.09)_0%,transparent_70%)] pointer-events-none" />
 
           {/* TOP BAR */}
           <div className="relative z-10 flex items-center justify-between text-xs font-mono text-neutral-400">
@@ -174,47 +175,41 @@ export default function LoadingScreen() {
             </div>
           </div>
 
-          {/* CENTER DISPLAY */}
-          <div className="relative z-10 flex flex-col items-center justify-center my-auto space-y-7">
-            {/* Avatar badge */}
-            <motion.div
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
-              className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl p-1 bg-gradient-to-b from-white/10 to-white/5 border border-emerald-500/30 shadow-[0_0_35px_rgba(16,185,129,0.22)] flex items-center justify-center overflow-hidden"
-            >
-              <Image
-                src="/icon.png"
-                alt="Luka Đurić"
-                width={96}
-                height={96}
-                priority
-                className="w-full h-full object-cover rounded-xl"
-              />
-            </motion.div>
+          {/* CENTER DISPLAY (Clean & Minimalist: Telemetry + Numbers + Progress Bar) */}
+          <div className="relative z-10 flex flex-col items-center justify-center my-auto space-y-8">
+            {/* Status Eyebrow */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-400">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span className="tracking-widest uppercase font-semibold">
+                {isSr ? "POKRETANJE SISTEMA" : "SYSTEM BOOT SEQUENCE"}
+              </span>
+            </div>
 
             {/* Percentage Display */}
-            <div className="text-center space-y-2">
+            <div className="text-center space-y-3">
               <div className="flex items-baseline justify-center gap-1">
-                <span className="text-6xl sm:text-8xl md:text-9xl font-black font-mono tracking-tight text-white tabular-nums">
+                <span className="text-7xl sm:text-9xl md:text-[11rem] leading-none font-black font-mono tracking-tighter text-white tabular-nums">
                   {progress < 10 ? `0${progress}` : progress}
                 </span>
-                <span className="text-2xl sm:text-4xl font-mono text-emerald-400 font-bold">
+                <span className="text-3xl sm:text-5xl font-mono text-emerald-400 font-bold">
                   %
                 </span>
               </div>
 
               {/* Progress Line */}
-              <div className="w-56 sm:w-72 h-1 bg-white/10 rounded-full overflow-hidden mx-auto">
+              <div className="w-60 sm:w-80 h-1.5 bg-white/10 rounded-full overflow-hidden mx-auto">
                 <motion.div
-                  className="h-full bg-gradient-to-r from-emerald-500 via-teal-300 to-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.8)]"
+                  className="h-full bg-gradient-to-r from-emerald-500 via-teal-300 to-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.9)]"
                   style={{ width: `${progress}%` }}
                 />
               </div>
             </div>
 
             {/* Telemetry subtitle */}
-            <p className="text-xs font-mono text-neutral-400 tracking-widest uppercase">
+            <p className="text-xs sm:text-sm font-mono text-neutral-400 tracking-widest uppercase">
               {isSr ? "Inženjer Softvera & Kreativac" : "Full-Stack Developer & Product Craftsman"}
             </p>
           </div>

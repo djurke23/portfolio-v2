@@ -80,12 +80,13 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/png", sizes: "32x32" },
-      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png?v=5", type: "image/png", sizes: "32x32" },
+      { url: "/favicon.ico?v=5", sizes: "any" },
+      { url: "/icon.png?v=5", type: "image/png", sizes: "512x512" },
+      { url: "/icon.svg?v=5", type: "image/svg+xml" },
     ],
-    shortcut: "/favicon.ico",
-    apple: "/apple-icon.png",
+    shortcut: "/favicon.ico?v=5",
+    apple: "/apple-icon.png?v=5",
   },
 };
 
@@ -167,11 +168,18 @@ export default function RootLayout({
                     document.documentElement.classList.remove('light');
                     document.documentElement.style.colorScheme = 'dark';
                   }
+                  if (sessionStorage.getItem('portfolio_intro_seen')) {
+                    document.documentElement.classList.add('has-seen-intro');
+                  }
                 } catch(e) {}
               })();
             `,
           }}
         />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=5" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=5" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png?v=5" />
+        <link rel="shortcut icon" href="/favicon.ico?v=5" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

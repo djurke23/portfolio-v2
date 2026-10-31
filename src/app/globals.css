@@ -138,6 +138,11 @@
   contain-intrinsic-size: auto 650px;
 }
 
+/* Hide preloader immediately on subsequent loads without flashing */
+html.has-seen-intro #app-preloader-root {
+  display: none !important;
+}
+
 /* ==========================================================================
    LIGHT MODE DESIGN SYSTEM
    Titanium paper aesthetic inspired by Apple & Linear
