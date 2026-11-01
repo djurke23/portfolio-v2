@@ -194,7 +194,7 @@ export default function RootLayout({
             <SoundProvider>
               <ToastProvider>
                 <SmoothScrollProvider>
-                  <LoadingScreen />
+                  {/* <LoadingScreen /> */}
                   <ScrollProgressBar />
                   <AmbientBackground />
                   <Navbar />

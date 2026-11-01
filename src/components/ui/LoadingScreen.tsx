@@ -78,7 +78,14 @@ const STAGES: StageDefinition[] = [
   },
 ];
 
+// Toggle to easily re-enable the loading screen whenever needed
+const SHOW_LOADING_SCREEN = false;
+
 export default function LoadingScreen() {
+  if (!SHOW_LOADING_SCREEN) {
+    return null;
+  }
+
   const hasSeenIntro = useSyncExternalStore(
     subscribeIntro,
     getClientSnapshot,

@@ -178,21 +178,22 @@ export default function CodeWindow() {
   const [time, setTime] = useState("3:09:02 AM");
   const [canType, setCanType] = useState(false);
 
-  // Synchronize typing with the cinematic loading screen
+  // Synchronize typing: starts typing after entrance, or waits for intro if present
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // If intro was already marked done (e.g. client-side SPA navigation between pages)
-    if (window.__introDone) {
+    const hasPreloader = document.getElementById("app-preloader-root") !== null;
+
+    // If preloader is not present or already finished, start typing after hero mounts smoothly
+    if (!hasPreloader || window.__introDone) {
       const startTimer = setTimeout(() => {
         setCanType(true);
-      }, 350);
+      }, 400);
       return () => clearTimeout(startTimer);
     }
 
     // Intro is currently active on screen: wait until curtain finishes lifting
     const handleIntroFinish = () => {
-      // 450ms pause gives the user time to see the CodeWindow reveal itself before typing begins
       setTimeout(() => {
         setCanType(true);
       }, 450);
