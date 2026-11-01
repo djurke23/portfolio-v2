@@ -5,28 +5,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { useSound } from "@/context/SoundContext";
 
-const STORAGE_KEY = "portfolio_intro_seen";
-
+let hasSeenIntroInMemory = false;
 let replayListeners: Array<() => void> = [];
 
 function subscribeIntro(callback: () => void) {
   replayListeners.push(callback);
-  window.addEventListener("storage", callback);
   return () => {
     replayListeners = replayListeners.filter((cb) => cb !== callback);
-    window.removeEventListener("storage", callback);
   };
 }
 
 function getClientSnapshot(): boolean {
-  try {
-    if (typeof window !== "undefined" && window.location.search.includes("loader=1")) {
-      return false;
-    }
-    return sessionStorage.getItem(STORAGE_KEY) === "true";
-  } catch {
-    return false;
-  }
+  return hasSeenIntroInMemory;
 }
 
 // Render in initial SSR HTML so preloader is visible on frame 0 with zero flash of site
@@ -109,21 +99,20 @@ export default function LoadingScreen() {
   const handleFinish = useCallback(() => {
     setDismissed(true);
     setReplaying(false);
-    try {
-      sessionStorage.setItem(STORAGE_KEY, "true");
-    } catch {
-      // Ignore storage errors
+    hasSeenIntroInMemory = true;
+    if (typeof window !== "undefined") {
+      window.__introDone = true;
+      try {
+        sessionStorage.removeItem("portfolio_intro_seen");
+      } catch {}
+      window.dispatchEvent(new CustomEvent("intro-finish"));
     }
     document.documentElement.style.overflow = "";
     document.body.style.overflow = "";
-    document.documentElement.classList.add("has-seen-intro");
     if (window.__lenis) {
       window.__lenis.start();
     }
     playOpen();
-    if (typeof window !== "undefined") {
-      window.dispatchEvent(new CustomEvent("intro-finish"));
-    }
   }, [playOpen]);
 
   // Lock scroll when visible and drive smooth 2.4s cinematic progress
@@ -193,12 +182,24 @@ export default function LoadingScreen() {
     };
   }, [isVisible, handleFinish, playClick, playSuccess]);
 
+  // Keep window state in sync
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.__introDone = !isVisible;
+    }
+  }, [isVisible]);
+
   // Listen for manual replay requests (e.g. from Command Palette)
   useEffect(() => {
     const handleReplayEvent = () => {
+      hasSeenIntroInMemory = false;
+      if (typeof window !== "undefined") {
+        window.__introDone = false;
+      }
       setProgress(0);
       setDismissed(false);
       setReplaying(true);
+      replayListeners.forEach((cb) => cb());
     };
 
     window.addEventListener("replay-loading-screen", handleReplayEvent);

@@ -168,9 +168,9 @@ export default function RootLayout({
                     document.documentElement.classList.remove('light');
                     document.documentElement.style.colorScheme = 'dark';
                   }
-                  if (sessionStorage.getItem('portfolio_intro_seen')) {
-                    document.documentElement.classList.add('has-seen-intro');
-                  }
+                  try {
+                    sessionStorage.removeItem('portfolio_intro_seen');
+                  } catch(e) {}
                 } catch(e) {}
               })();
             `,

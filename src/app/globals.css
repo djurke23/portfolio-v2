@@ -138,11 +138,6 @@
   contain-intrinsic-size: auto 650px;
 }
 
-/* Hide preloader immediately on subsequent loads without flashing */
-html.has-seen-intro #app-preloader-root {
-  display: none !important;
-}
-
 /* Infinite Marquee Animation */
 @keyframes marqueeScroll {
   0% {

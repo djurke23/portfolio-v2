@@ -182,20 +182,11 @@ export default function CodeWindow() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Has user already seen/completed intro previously?
-    const hasSeenIntro =
-      sessionStorage.getItem("portfolio_intro_seen") === "true" &&
-      !window.location.search.includes("loader=1");
-
-    // Check whether the preloader DOM element is actively mounted
-    const preloaderElement = document.getElementById("app-preloader-root");
-    const isIntroActive = !hasSeenIntro || preloaderElement !== null;
-
-    if (!isIntroActive) {
-      // Intro already finished before: start typing after smooth initial hero entrance
+    // If intro was already marked done (e.g. client-side SPA navigation between pages)
+    if (window.__introDone) {
       const startTimer = setTimeout(() => {
         setCanType(true);
-      }, 400);
+      }, 350);
       return () => clearTimeout(startTimer);
     }
 
@@ -214,9 +205,15 @@ export default function CodeWindow() {
     window.addEventListener("intro-finish", handleIntroFinish);
     window.addEventListener("replay-loading-screen", handleIntroReplay);
 
+    // Guaranteed fallback: If intro-finish hasn't arrived within 3.2s, start typing anyway
+    const safetyFallback = setTimeout(() => {
+      setCanType(true);
+    }, 3200);
+
     return () => {
       window.removeEventListener("intro-finish", handleIntroFinish);
       window.removeEventListener("replay-loading-screen", handleIntroReplay);
+      clearTimeout(safetyFallback);
     };
   }, []);
 

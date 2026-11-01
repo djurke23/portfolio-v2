@@ -92,5 +92,7 @@ export interface TechnologyCategory {
 declare global {
   interface Window {
     __lenis?: import("lenis").default;
+    __introDone?: boolean;
+    __introActive?: boolean;
   }
 }
